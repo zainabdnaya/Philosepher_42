@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 16:31:16 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/04/25 03:14:19 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/04/25 03:26:19 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ void    *cycle(void *arg)
     index = get_index(data);
     fork_nbr = 0;
 
-    // printf("index==>%d\n",index);
+    if ( data->is_eating == 0)
+            printf("The philosophe %d is Thinking!\n",data->is_sit_in);
     if (pthread_mutex_lock(&data->forks[index]) == 0)
     {
         fork_nbr++;
@@ -70,8 +71,6 @@ void    *cycle(void *arg)
         printf("Philosopher %d is sleeping \n",data->is_sit_in);
         usleep(data->t_sleep * 1000);
     }
-    if ( data->is_thinking == 1)
-            printf("The philosophe %d is Thinking!\n",data->is_sit_in);
 
     return(arg);
 }
@@ -91,6 +90,12 @@ void    creat_threads(t_data *data)
     {
         // puts("here");
         pthread_create(&data->philo[i], NULL,cycle ,(void *)data);
+        i++;
+    }
+    i = 0;
+    while( i < data->nbr_philo)
+    {
+        pthread_join(data->philo[i],NULL);
         i++;
     }
 }
