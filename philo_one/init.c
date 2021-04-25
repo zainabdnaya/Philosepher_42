@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 20:39:14 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/04/25 01:24:11 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/04/25 01:44:31 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,11 +32,11 @@ void    initial_data(int ac, char **av,t_data *data)
         return ;
 }
 
-t_philo_state    *init_philo(t_data *data)
+void    init_philo(t_data *data)
 {
     int j;
 
-    j = 1;
+    j = 0;
     data->philosophe = malloc(sizeof(data->philosophe) * (data->nbr_philo));
     if ( ! (data->philosophe))
         return NULL;
@@ -51,7 +51,6 @@ t_philo_state    *init_philo(t_data *data)
            data->philosophe[j].eating_round =0;
            j++;
     }
-    return(data->philosophe);
 }
 
 

@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 23:44:09 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/04/25 01:22:48 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/04/25 01:44:45 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_data
 }               t_data;
 void                    ft_putstr_fd(char *s, int fd);
 void                    initial_data(int ac, char **av,t_data *data);
-t_philo_state           *init_philo(t_data *data);
+void                    init_philo(t_data *data);
 
 uint64_t                my_atoi(const char *str);
 

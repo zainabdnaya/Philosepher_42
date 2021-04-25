@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 16:31:16 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/04/25 01:32:40 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/04/25 01:50:03 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,6 @@ void    *i_dont_know(void *arg)
     
     data = (t_data *)arg;
 
-    data->philosophe = init_philo(data);
-    print(data);
     if ( data->philosophe->is_thinking == 1)
         ft_putstr_fd("Philososphe is Thinking",1);
     return(arg);
@@ -61,12 +59,25 @@ void    creat_threads(t_data *data)
     }
 }
 
+void    initial_mutex(t_data *data)
+{
+    int i;
+
+    i = 0;
+    while( i < data->nbr_forks)
+    {
+        pthread_mutex_init(data->forks,NULL);
+        i++;
+    }
+}
 int main(int ac, char **av)
 {
     t_data data;
     pthread_t test;
 
     initial_data(ac, av, &data);
+    init_philo(&data);
     creat_threads(&data);
+    initial_mutex(&data);
     
 }
