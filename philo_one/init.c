@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 20:39:14 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/04/25 01:44:31 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/04/25 02:32:34 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,27 +30,11 @@ void    initial_data(int ac, char **av,t_data *data)
     data->forks = malloc(sizeof(pthread_mutex_t) *(data->nbr_forks));
     if (!data->philo || !data->forks)
         return ;
+    data->is_thinking = 1;
+    data->is_eating = 0;
+    data->is_sleeping = 0;
+    data->is_sit_in = 0;
 }
 
-void    init_philo(t_data *data)
-{
-    int j;
-
-    j = 0;
-    data->philosophe = malloc(sizeof(data->philosophe) * (data->nbr_philo));
-    if ( ! (data->philosophe))
-        return NULL;
-    while (j <= data->nbr_philo)
-    {
-           data->philosophe[j].is_sit_in = j;
-           data->philosophe[j].is_thinking = 1;
-           data->philosophe[j].is_eating = 0;
-           data->philosophe[j].is_sleeping = 0;
-           data->philosophe[j].left_fork = j;
-           data->philosophe[j].right_fork = (j + 1) % (data->nbr_philo);
-           data->philosophe[j].eating_round =0;
-           j++;
-    }
-}
 
 
