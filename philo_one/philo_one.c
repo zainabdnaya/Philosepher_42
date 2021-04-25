@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 16:31:16 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/04/25 03:26:19 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/04/25 03:33:16 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ void    *cycle(void *arg)
         fork_nbr++;
         printf("The philosepher %d take the fork %d\n",data->is_sit_in,fork_nbr);
     }
-    if (pthread_mutex_lock(&data->forks[((index + 1) % (data->nbr_philo))]) == 0)
+    if (pthread_mutex_lock(&data->forks[(index + 1) % data->nbr_philo]) == 0)
     {
         fork_nbr++;
         printf("The philosepher %d take the fork %d\n",index,fork_nbr);
@@ -63,15 +63,15 @@ void    *cycle(void *arg)
     if ( fork_nbr == 2)
     {
         data->is_eating = 1;
-        printf("Philosopher %d start eating \n",data->is_sit_in);
         usleep(data->t_eat * 1000);
+        printf("Philosopher %d start eating \n",data->is_sit_in);
         pthread_mutex_unlock(&data->forks[index]);
         pthread_mutex_unlock(&data->forks[((index + 1) % (data->nbr_philo))]);
         data->is_sleeping = 1;
         printf("Philosopher %d is sleeping \n",data->is_sit_in);
         usleep(data->t_sleep * 1000);
     }
-
+    cycle(arg);
     return(arg);
 }
 
