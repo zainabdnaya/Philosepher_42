@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   threads.c                                          :+:      :+:    :+:   */
+/*   test_threads.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 23:05:17 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/04/24 02:08:47 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/04/24 02:14:54 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int main()
 {
     pthread_t newthread;
     int *v;
-    pthread_create(&newthread, NULL ,myturn, NULL); // create thrrad
+    pthread_create(&newthread, NULL ,myturn, NULL); // function create thread
     // myturn();
     yourturn();
     pthread_join(newthread, (void *)&v); //it will wait until specific thread finishe runing
