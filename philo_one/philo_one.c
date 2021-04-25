@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_one.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 16:31:16 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/04/25 17:59:16 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/04/25 19:08:08 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void *cycle(void *arg)
         index = get_index(data);
         fork_nbr = 0;
         if ( data->is_eating[index] == '0')
-            printf("\033[95m Philosophe %d is Thinking!\n\033[0m", data->is_sit_in);
+            printf("\033[94m Philosophe %d is Thinking!\n\033[0m", data->is_sit_in);
         if (pthread_mutex_lock(&data->forks[index]) == 0)
         {
             fork_nbr++;
