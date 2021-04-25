@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 20:39:14 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/04/25 02:32:34 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/04/25 04:11:42 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,13 @@ void    initial_data(int ac, char **av,t_data *data)
     else
         data->round_eat = 0;
     data->nbr_forks =  (unsigned int) my_atoi(av[1]);
-    data->philo = malloc(sizeof(pthread_t) * (data->nbr_philo));
-    data->forks = malloc(sizeof(pthread_mutex_t) *(data->nbr_forks));
-    if (!data->philo || !data->forks)
+    data->philo = (pthread_t *) malloc(sizeof(pthread_t) * (data->nbr_philo));
+    if (!data->philo)
         return ;
-    data->is_thinking = 1;
+    data->forks =  (pthread_mutex_t *) malloc(sizeof(pthread_mutex_t) *(data->nbr_forks));
+    if ( daylight)
     data->is_eating = 0;
-    data->is_sleeping = 0;
-    data->is_sit_in = 0;
+    data->is_thinking = 1;
 }
 
 
