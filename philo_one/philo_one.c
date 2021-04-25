@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 16:31:16 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/04/25 03:10:06 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/04/25 03:14:19 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void    *cycle(void *arg)
     index = get_index(data);
     fork_nbr = 0;
 
-    printf("index==>%d\n",index);
+    // printf("index==>%d\n",index);
     if (pthread_mutex_lock(&data->forks[index]) == 0)
     {
         fork_nbr++;
@@ -61,13 +61,14 @@ void    *cycle(void *arg)
     }
     if ( fork_nbr == 2)
     {
-            data->is_eating = 1;
-        pthread_mutex_unlock(&data->forks[index]);
-        pthread_mutex_unlock(&data->forks[((index + 1) % (data->nbr_philo))]);
+        data->is_eating = 1;
         printf("Philosopher %d start eating \n",data->is_sit_in);
         usleep(data->t_eat * 1000);
+        pthread_mutex_unlock(&data->forks[index]);
+        pthread_mutex_unlock(&data->forks[((index + 1) % (data->nbr_philo))]);
         data->is_sleeping = 1;
         printf("Philosopher %d is sleeping \n",data->is_sit_in);
+        usleep(data->t_sleep * 1000);
     }
     if ( data->is_thinking == 1)
             printf("The philosophe %d is Thinking!\n",data->is_sit_in);
