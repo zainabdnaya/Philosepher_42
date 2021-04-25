@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 16:31:16 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/04/25 01:25:33 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/04/25 01:32:40 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void    *i_dont_know(void *arg)
     data->philosophe = init_philo(data);
     print(data);
     if ( data->philosophe->is_thinking == 1)
-        ft_putstr_fd("Philososphe is Thinking",0);
+        ft_putstr_fd("Philososphe is Thinking",1);
     return(arg);
 }
 
