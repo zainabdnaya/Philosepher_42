@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosepher.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
+/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 23:44:09 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/04/25 02:10:36 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/04/25 17:31:15 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,11 @@
 # include <sys/time.h>
 # include <stdint.h>
 # include <stdio.h>
+# include <string.h>
+# define HUNGER '1'
+# define STARVE '0'
+# define Think '1'
+# define DUMM '0'
 
 typedef struct s_pilo_state
 {
@@ -36,9 +41,8 @@ typedef struct s_data
     unsigned int        nbr_forks;
         pthread_t       *philo;
     pthread_mutex_t     *forks;
+    char                *is_eating;
     int                 is_sit_in;
-    int                 is_thinking;
-    int                 is_eating;
     int                 is_sleeping;
     int                 left_fork;
     int                 right_fork;

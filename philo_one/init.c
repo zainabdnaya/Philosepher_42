@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
+/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 20:39:14 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/04/25 04:11:42 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/04/25 17:40:44 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,13 @@
 
 void    initial_data(int ac, char **av,t_data *data)
 {
-    if ( ac < 5 || ac > 6)
+    int i;
+
+    i = 0;
+    if (ac < 5 || ac > 6)
         ft_putstr_fd("Error: bad arguments number\n", 1);
     data->nbr_philo = (unsigned int) my_atoi(av[1]);
+    data->nbr_forks =  (unsigned int) my_atoi(av[1]);
     data->t_die = my_atoi(av[2]);
     data->t_eat = my_atoi(av[3]);
     data->t_sleep = my_atoi(av[4]);
@@ -25,14 +29,15 @@ void    initial_data(int ac, char **av,t_data *data)
         data->round_eat = (unsigned int) my_atoi(av[5]);
     else
         data->round_eat = 0;
-    data->nbr_forks =  (unsigned int) my_atoi(av[1]);
     data->philo = (pthread_t *) malloc(sizeof(pthread_t) * (data->nbr_philo));
-    if (!data->philo)
-        return ;
     data->forks =  (pthread_mutex_t *) malloc(sizeof(pthread_mutex_t) *(data->nbr_forks));
-    if ( daylight)
-    data->is_eating = 0;
-    data->is_thinking = 1;
+    data->is_eating = malloc(sizeof(char) * (data->nbr_philo + 1));
+    while (i < data->nbr_philo)
+    {
+        data->is_eating[i] = '0';
+        i++;
+    }
+    data->is_eating[i] = '\0';
 }
 
 
