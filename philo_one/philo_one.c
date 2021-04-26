@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 16:31:16 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/04/26 01:07:45 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/04/26 01:29:46 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ int get_index(t_data *data)
         data->is_sit_in++;
     else
     {
+        data->status[index] = THINKING;;
         data->is_sit_in = 1;
         index = 0;
     }
@@ -49,8 +50,11 @@ void *cycle(void *arg)
     {
         fork_nbr = 0;
         index = get_index(data);
-        if ( data->status[index] == THINKING || data->status[index] == SLEEP)
-            printf("\033[94m Philosophe %d is Thinking!\n\033[0m", data->is_sit_in);
+        if ( data->status[index] == THINKING )
+    {
+        printf("\033[94m Philosophe %d is Thinking!\n\033[0m", data->is_sit_in);
+        data->status[index] = THINKING;
+    }
         if ( data->status[index] == THINKING && pthread_mutex_lock(&data->forks[index]) == 0)
         {
             fork_nbr++;
@@ -69,8 +73,9 @@ void *cycle(void *arg)
             pthread_mutex_unlock(&data->forks[index]);
             pthread_mutex_unlock(&data->forks[((index + 1) % (data->nbr_philo))]);
             printf("\033[33m Philosopher %d is sleeping \n\033[0m", data->is_sit_in);
-            usleep(data->t_sleep * 1000);
             data->status[index] =  SLEEP ;
+            usleep(data->t_sleep * 1000);
+            data->status[index] = THINKING;
         }
     }
     arg = (void *)data;
