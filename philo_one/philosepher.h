@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 23:44:09 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/04/25 21:06:04 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/04/26 00:49:50 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,9 @@
 # include <stdint.h>
 # include <stdio.h>
 # include <string.h>
-# define HUNGER '1'
-# define STARVE '0'
+# define  THINKING '0'
+# define  EAT '1'
+# define  SLEEP '2'
 
 typedef struct s_pilo_state
 {
@@ -39,7 +40,7 @@ typedef struct s_data
     unsigned int        nbr_forks;
         pthread_t       *philo;
     pthread_mutex_t     *forks;
-    char                *is_eating;
+    char                *status;
     int                 is_sit_in;
     int                 is_sleeping;
     int                 left_fork;

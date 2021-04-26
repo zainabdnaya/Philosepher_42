@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 16:31:16 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/04/26 00:20:54 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/04/26 00:56:24 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,21 +50,20 @@ void *cycle(void *arg)
         fork_nbr = 0;
         index = get_index(data);
         data->is_thinking = 1;
-        if ( data->is_thinking == 1 )
+        if ( data->status[index] == THINKING || data->status[index] == SLEEP)
             printf("\033[94m Philosophe %d is Thinking!\n\033[0m", data->is_sit_in);
-        if (pthread_mutex_lock(&data->forks[index]) == 0)
+        if ( data->status[index] == THINKING && pthread_mutex_lock(&data->forks[index]) == 0)
         {
             fork_nbr++;
             printf("The Philosepher \033[31m%d\033[0m take the fork %d\n", data->is_sit_in, fork_nbr);
         }
-        if (fork_nbr == 1 &&(pthread_mutex_lock(&data->forks[(index + 1) % data->nbr_philo]) == 0))
+        if (data->status[index] == THINKING && fork_nbr == 1 &&(pthread_mutex_lock(&data->forks[(index + 1) % data->nbr_philo]) == 0))
         {
             fork_nbr++;
-            data->is_eating[index] = HUNGER ;
-            data->is_thinking = 0;
+            data->status[index] = EAT;
             printf("The philosepher \033[31m%d\033[0m take the fork %d\n", data->is_sit_in, fork_nbr);
         }
-        if(fork_nbr == 2 )
+        if(fork_nbr == 2  && data->status[index] == EAT)
         {
             printf("\033[33m Philosopher %d is eating \n\033[0m", data->is_sit_in);
             usleep(data->t_eat * 1000);
@@ -72,7 +71,7 @@ void *cycle(void *arg)
             pthread_mutex_unlock(&data->forks[((index + 1) % (data->nbr_philo))]);
             printf("\033[33m Philosopher %d is sleeping \n\033[0m", data->is_sit_in);
             usleep(data->t_sleep * 1000);
-            data->is_thinking = 1;
+            data->status[index] =  SLEEP ;
         }
     }
     arg = (void *)data;
