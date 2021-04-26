@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosepher.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 23:44:09 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/04/25 17:31:15 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/04/25 21:06:04 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,6 @@
 # include <string.h>
 # define HUNGER '1'
 # define STARVE '0'
-# define Think '1'
-# define DUMM '0'
 
 typedef struct s_pilo_state
 {
@@ -46,6 +44,7 @@ typedef struct s_data
     int                 is_sleeping;
     int                 left_fork;
     int                 right_fork;
+    int                 is_thinking;
 }               t_data;
 void                    ft_putstr_fd(char *s, int fd);
 void                    initial_data(int ac, char **av,t_data *data);

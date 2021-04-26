@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 20:39:14 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/04/25 17:40:44 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/04/25 23:55:32 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,11 @@ void    initial_data(int ac, char **av,t_data *data)
     data->is_eating = malloc(sizeof(char) * (data->nbr_philo + 1));
     while (i < data->nbr_philo)
     {
-        data->is_eating[i] = '0';
+        data->is_eating[i] = STARVE ;
         i++;
     }
     data->is_eating[i] = '\0';
+    data->is_thinking = 1;
 }
 
 
