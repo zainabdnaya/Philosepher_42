@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 20:39:14 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/04/26 00:57:31 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/04/26 01:51:57 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void    initial_data(int ac, char **av,t_data *data)
     data->philo = (pthread_t *) malloc(sizeof(pthread_t) * (data->nbr_philo));
     data->forks =  (pthread_mutex_t *) malloc(sizeof(pthread_mutex_t) *(data->nbr_forks));
     data->status = malloc(sizeof(char) * (data->nbr_philo + 1));
+    data->is_sit_in = 0;
     while (i < data->nbr_philo)
     {
         data->status[i] = THINKING ;
