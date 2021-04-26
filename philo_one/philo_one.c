@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 16:31:16 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/04/26 01:05:47 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/04/26 01:07:45 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ void *cycle(void *arg)
         if (data->status[index] == THINKING &&(pthread_mutex_lock(&data->forks[(index + 1) % data->nbr_philo]) == 0))
         {
             fork_nbr++;
-            data->status[index] = EAT;
             printf("The philosepher \033[31m%d\033[0m take the fork %d\n", data->is_sit_in, fork_nbr);
         }
-        if(fork_nbr == 2  && data->status[index] == EAT)
+        if(fork_nbr == 2 )
         {
+            data->status[index] = EAT;
             printf("\033[33m Philosopher %d is eating \n\033[0m", data->is_sit_in);
             usleep(data->t_eat * 1000);
             pthread_mutex_unlock(&data->forks[index]);
