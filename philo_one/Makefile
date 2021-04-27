@@ -3,14 +3,14 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+         #
+#    By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/23 23:41:39 by zainabdnaya       #+#    #+#              #
-#    Updated: 2021/04/25 16:22:57 by zdnaya           ###   ########.fr        #
+#    Updated: 2021/04/27 21:21:20 by zainabdnaya      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME= philosepher
+NAME= philo_one
 OBJ_PATH= obj
 H_FLAG= -I ./philosepher.h
 COMP= gcc

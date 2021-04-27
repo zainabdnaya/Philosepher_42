@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 16:31:16 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/04/27 03:01:17 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/04/27 21:42:04 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,39 +55,38 @@ void *cycle(void *arg)
         if (data->status[index] == THINKING || data->status[index] == SLEEP)
         {
             data->time = time_data() - data->start;
-            printf("\033[94m AT %lld ms Philosophe %d is Thinking!\n\033[0m", data->time, index);
+            printf("\033[94m AT %lld ms\t\t :Philosophe %d is dpwek[keßßThinking!\033[0m\n", data->time, index);
         }
         if (pthread_mutex_lock(&data->forks[index]) == 0)
         {
             fork_nbr++;
             data->time = time_data() - data->start;
 
-            printf("AT %lld ms The Philosepher \033[31m%d\033[0m take the fork %d\n", data->time, index, fork_nbr);
+            printf("AT %lld ms\t\t:The Philosepher \033[31m%d\033[0m take the fork %d\n", data->time, index, fork_nbr);
         }
         if ((pthread_mutex_lock(&data->forks[(index + 1) % data->nbr_philo]) == 0))
         {
             fork_nbr++;
             data->time = time_data() - data->start;
-
-            printf("AT %lld ms The philosepher \033[31m%d\033[0m take the fork %d\n", data->time, index, fork_nbr);
+            printf("AT %lld ms\t\t:The philosepher \033[31m%d\033[0m take the fork %d\n", data->time, index, fork_nbr);
         }
         if (fork_nbr == 2)
         {
             data->last_meal = time_data();
             data->time = time_data() - data->start;
             data->status[index] = EAT;
-            printf("\xF0\x9F\x8D\x89 \033[32m AT %lld ms Philosopher %d is eating \n\033[0m", data->time, index);
+            printf("\033[32m AT %lld ms\t:Philosopher %d is eating\033[0m\xF0\x9F\x8D\x89\n", data->time, index);
             usleep(data->t_eat * 1000);
             pthread_mutex_unlock(&data->forks[index]);
             pthread_mutex_unlock(&data->forks[((index + 1) % (data->nbr_philo))]);
             data->last_meal = time_data();
-            printf("\xF0\x9F\x8C\x9B\033[32m AT %lld Philosopher %d is sleeping \n\033[0m", data->time, index);
+            printf("\033[32m AT %lld ms\t:Philosopher %d is sleeping\033[0m\xF0\x9F\x8C\x9B\n", data->time, index);
             data->status[index] = SLEEP;
             usleep(data->t_sleep * 1000);
         }
         if ( time_data() - data->last_meal  >= data->t_die )
         {
-            printf("\u2620\033[31m AT %lld ms Philosopher %d is DEATH \n\033[0m", data->time, index);
+            printf("\033[31m AT %lld ms\t:\u2620 Philosopher %d is DEATH\033[0m\n", data->time, index);
             exit(1);
         }
     }
