@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 20:39:14 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/04/26 01:51:57 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/04/27 02:20:23 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,9 @@ void    initial_data(int ac, char **av,t_data *data)
         i++;
     }
     data->status[i] = '\0';
+    data->start = time_data();
+    data->death = 0;
+    data->start = time_data();
 }
 
 

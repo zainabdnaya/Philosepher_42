@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   needed.c                                           :+:      :+:    :+:   */
+/*   time.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/04/24 16:44:07 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/04/26 23:51:55 by zainabdnaya      ###   ########.fr       */
+/*   Created: 2021/04/26 22:58:34 by zainabdnaya       #+#    #+#             */
+/*   Updated: 2021/04/26 23:02:23 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "philosepher.h"
+#include <stdio.h>
+#include <sys/time.h>
 
-uint64_t    time_data(void)
+int main()
 {
-    static struct timeval	tv;
-	gettimeofday(&tv, NULL);
-	return ((tv.tv_sec * (uint64_t)1000) + (tv.tv_usec / 1000));
-}
+    struct timeval tv;
+    struct timezone tz;
 
-void    ft_putstr_fd(char *s, int fd)
-{
-    int i;
+    gettimeofday(&tv,&tz);
 
-    i = 0;
-    if (!s)
-        return;
-    while (s[i])
-        write(fd, &s[i++], 1);
+    printf("Seconde : %lu\n",tv.tv_sec);
+    printf("Microseconds: %d\n",tv.tv_usec);
+    printf("Minutes west of Greenwich: %d\n",tz.tz_minuteswest);
+    printf("Daylight Saving Time adjustment: %d\n",tz.tz_dsttime);
+
+    return(0);
 }

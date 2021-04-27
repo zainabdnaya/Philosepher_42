@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 23:44:09 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/04/26 00:49:50 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/04/27 01:45:24 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,14 @@ typedef struct s_data
     int                 left_fork;
     int                 right_fork;
     int                 is_thinking;
+    uint64_t            time;
+    uint64_t            last_meal;
+    uint64_t            start;
+    int                 death;
 }               t_data;
 void                    ft_putstr_fd(char *s, int fd);
 void                    initial_data(int ac, char **av,t_data *data);
-
+uint64_t                time_data(void);
 uint64_t                my_atoi(const char *str);
 
 #endif
