@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 23:44:09 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/04/27 01:45:24 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/04/27 22:46:48 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ typedef struct s_data
     int                 is_thinking;
     uint64_t            time;
     uint64_t            last_meal;
-    uint64_t            start;
+    uint64_t            *start;
     int                 death;
 }               t_data;
 void                    ft_putstr_fd(char *s, int fd);
