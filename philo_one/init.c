@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 20:39:14 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/04/27 23:05:18 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/04/28 00:22:21 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void    initial_data(int ac, char **av,t_data *data)
     data->status[i] = '\0';
     data->death = 0;
     i = 0;
-    data->start = malloc(sizeof(char) * (data->nbr_philo + 1));
+    data->start = malloc(sizeof(uint64_t) * (data->nbr_philo + 1));
     while(i < data->nbr_philo)
     {
         data->start[i] = time_data();

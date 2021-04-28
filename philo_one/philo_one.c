@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 16:31:16 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/04/27 23:09:53 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/04/28 01:42:29 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,16 @@ int get_index(t_data *data)
     }
     return (index);
 }
-
+int death(t_data *data, int index)
+{
+    if (time_data() - data->last_meal >= data->t_die)
+    {
+        printf("\033[31mAT %lld ms\t:\u2620 Philosopher %d is DEATH\n", data->time, index);
+        // exit(1);
+        return (1);
+    }
+    return (0);
+}
 void *cycle(void *arg)
 {
     t_data *data;
@@ -49,7 +58,6 @@ void *cycle(void *arg)
     while (1)
     {
         fork_nbr = 0;
-
         index = get_index(data);
         data->status[index] = THINKING;
         if (data->status[index] == THINKING || data->status[index] == SLEEP)
@@ -61,33 +69,41 @@ void *cycle(void *arg)
         {
             fork_nbr++;
             data->time = time_data() - data->start[index];
-
+            if (data->time > data->t_die)
+            {
+                printf("\033[31mAT %lld ms\t:\u2620 Philosopher %d is DEATH\n", data->time, index);
+                exit(1);
+            }
             printf("\033[0;30mAT %lld ms\t\t:The Philosepher \033[31m%d\033[0m take the fork %d\n", data->time, index, fork_nbr);
         }
         if ((pthread_mutex_lock(&data->forks[(index + 1) % data->nbr_philo]) == 0))
         {
             fork_nbr++;
             data->time = time_data() - data->start[index];
+            if (data->time > data->t_die)
+            {
+                printf("\033[31mAT %lld ms\t:\u2620 Philosopher %d is DEATH\n", data->time, index);
+                exit(1);
+            }
             printf("\033[0;30mAT %lld ms\t\t:The philosepher \033[31m%d\033[0m take the fork %d\n", data->time, index, fork_nbr);
         }
         if (fork_nbr == 2)
         {
+            pthread_mutex_lock(&data->is_eating);
             data->time = time_data() - data->start[index];
             data->status[index] = EAT;
             printf("\033[32mAT %lld ms\t\t:Philosopher %d is eating\033[0m\n", data->time, index);
             usleep(data->t_eat * 1000);
             pthread_mutex_unlock(&data->forks[index]);
             pthread_mutex_unlock(&data->forks[((index + 1) % (data->nbr_philo))]);
+            pthread_mutex_unlock(&data->is_eating);
             data->last_meal = time_data();
             printf("\033[32mAT %lld ms\t\t:Philosopher %d is sleeping\033[0m\n", data->time, index);
             data->status[index] = SLEEP;
             usleep(data->t_sleep * 1000);
         }
-        if ( time_data() - data->last_meal  >= data->t_die )
-        {
-            printf("\033[31mAT %lld ms\t:\u2620 Philosopher %d is DEATH\n", data->time, index);
+        if (death(data, index) == 1)
             exit(1);
-        }
     }
     arg = (void *)data;
     return (arg);
@@ -106,12 +122,14 @@ void creat_threads(t_data *data)
     i = 0;
     while (i < data->nbr_philo)
     {
-        pthread_create(&data->philo[i], NULL, cycle, (void *)data);
+        if (pthread_create(&data->philo[i], NULL, cycle, (void *)data) != 0)
+            return;
+        // pthread_detach(data->philo[i]);
         i++;
     }
     i = 0;
     while (i < data->nbr_philo)
-    { 
+    {
         pthread_join(data->philo[i], NULL);
         i++;
     }
