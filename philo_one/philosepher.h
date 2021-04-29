@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 23:44:09 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/04/29 02:29:51 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/04/29 02:57:48 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,5 +69,5 @@ uint64_t                my_atoi(const char *str);
 size_t                  ft_strlen(const char *s);
 
 int                     handle_errors(char const *str);
-
+int                     death(t_data *data, int w);
 #endif

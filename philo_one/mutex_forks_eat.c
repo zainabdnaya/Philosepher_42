@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 00:24:48 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/04/29 02:33:53 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/04/29 03:00:02 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,10 @@
 void pickup_forks(t_data *data)
 {
     pthread_mutex_lock(&data->forks[data->index]);
+    death(data,2);
     display_msg(data, 4);
     pthread_mutex_lock(&data->forks[(data->index + 1) % data->nbr_philo]);
+     death(data,2);
     display_msg(data, 4);
 }
 

@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 16:31:16 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/04/29 02:47:04 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/04/29 03:01:08 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,29 +37,7 @@ int get_index(t_data *data)
     }
     return (index);
 }
-int death(t_data *data, int w)
-{
-    if (w == 1)
-    {
-        if (time_data() - data->last_meal >= data->t_die)
-        {
-            data->time = time_data() - data->start[data->index];
-            printf("\033[31mAT %lld ms\t:\u2620 Philosopher %d is DEATH\n", data->time, data->nbr_philo);
-            exit(1);
-        }
-    }
-    if (w == 2)
-    {
-        if (data->time > data->t_die)
-        {
-            data->time = time_data() - data->start[data->index];
-            printf("\033[31mAT %lld ms\t:\u2620 Philosopher %d is DEATH\n", data->time, data->nbr_philo);
-            exit(1);
-        }
-    }
-    pthread_mutex_unlock(&data->mtx_death);
-    return (0);
-}
+
 void *cycle(void *arg)
 {
     t_data *data;
@@ -68,7 +46,6 @@ void *cycle(void *arg)
     data = (t_data *)arg;
     while (1)
     {
-
        display_msg(data, 1);
        pickup_forks(data);
        eating_time(data);
@@ -93,14 +70,12 @@ void creat_threads(t_data *data)
     i = 0;
     while (i < data->nbr_philo)
     {
-
-               data->fork_nbr = 0;
-        if (pthread_create(&id, NULL, cycle, (void *)data) != 0)
-            return;
-        data->index = i;
-        usleep(40);
-        i++;
+        data->fork_nbr = 0;
+        pthread_create(&id, NULL, cycle, (void *)data);
         pthread_detach(id);
+        data->index = i;
+        usleep(10);
+        i++;
     }
     i = 0;
     // while (i < data->nbr_philo)
