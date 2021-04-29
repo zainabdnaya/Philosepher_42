@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mutex_forks_eat.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
+/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 00:24:48 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/04/29 03:20:51 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/04/29 11:55:10 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void eating_time(t_data *data)
         display_msg(data, 2);
         usleep(1000 * (data->t_eat));
         pthread_mutex_unlock(&data->is_eating);
+        data->last_meal = time_data();
     }
 }
 

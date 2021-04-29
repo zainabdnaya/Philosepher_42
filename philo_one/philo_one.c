@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_one.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
+/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 16:31:16 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/04/29 03:23:24 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/04/29 12:04:21 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,12 +47,37 @@ void *cycle(void *arg)
     while (1)
     {
        display_msg(data, 1);
-       pickup_forks(data);
-       eating_time(data);
-       put_down_forks(data);
-       death(data, 1);
-    }
-    arg = (void *)data;
+	   if (pthread_mutex_lock(&data->forks[data->index]) == 0)
+	   {
+		   death(data, 2);
+		   display_msg(data, 4);
+	   }
+	   if (pthread_mutex_lock(&data->forks[(data->index + 1) % data->nbr_philo]) == 0)
+	   {
+		   death(data, 2);
+		   display_msg(data, 4);
+		   data->status[data->index] = EAT;
+	   }
+		if (data->status[data->index] == EAT && data->fork_nbr == 2)
+		{
+			pthread_mutex_lock(&data->is_eating);
+			display_msg(data, 2);
+			usleep(1000 * (data->t_eat));
+			pthread_mutex_unlock(&data->is_eating);
+			data->last_meal = time_data();
+		}
+		pthread_mutex_unlock(&data->forks[data->index]);
+		pthread_mutex_unlock(&data->forks[((data->index + 1) % (data->nbr_philo))]);
+		display_msg(data, 3);
+		usleep(data->t_sleep * 1000);
+		if (time_data() - data->last_meal >= data->t_die)
+		{
+			data->time = time_data() - data->start[data->index];
+			printf("\033[31mAT %lld ms\t\t:\u2620 Philosopher %d is DEATH\n", data->time, data->index + 1);
+			exit(1);
+		}
+	}
+	arg = (void *)data;
     return (arg);
 }
 
