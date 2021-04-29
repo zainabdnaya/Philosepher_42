@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 16:31:16 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/04/29 03:01:08 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/04/29 03:23:24 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void *cycle(void *arg)
        pickup_forks(data);
        eating_time(data);
        put_down_forks(data);
-        death(data, 1);
+       death(data, 1);
     }
     arg = (void *)data;
     return (arg);
@@ -70,11 +70,12 @@ void creat_threads(t_data *data)
     i = 0;
     while (i < data->nbr_philo)
     {
+        data->index = i;
+        data->start[data->index] = time_data();
         data->fork_nbr = 0;
         pthread_create(&id, NULL, cycle, (void *)data);
         pthread_detach(id);
-        data->index = i;
-        usleep(10);
+        usleep(100);
         i++;
     }
     i = 0;
