@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 20:39:14 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/04/28 00:22:21 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/04/28 23:29:33 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,11 @@ void    initial_data(int ac, char **av,t_data *data)
         data->start[i] = time_data();
         i++;
     }
+    data->last_meal = 0;
+    data->index = 0;
+    pthread_mutex_init(&data->mtx_death, NULL);
+    pthread_mutex_init(&data->msg, NULL);
+    pthread_mutex_init(&data->is_eating,NULL);
 }
 
 

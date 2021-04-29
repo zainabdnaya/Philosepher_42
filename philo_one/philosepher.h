@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 23:44:09 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/04/28 01:33:12 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/04/29 02:29:51 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,12 +50,24 @@ typedef struct s_data
     uint64_t            last_meal;
     uint64_t            *start;
     pthread_mutex_t     is_eating;
-
+    pthread_mutex_t     mtx_death;
+    pthread_mutex_t     msg;
     int                 death;
+    int                 index;
+    int                 fork_nbr;
 }               t_data;
 void                    ft_putstr_fd(char *s, int fd);
 void                    initial_data(int ac, char **av,t_data *data);
+void                    display_msg(t_data *data, int w);
+void                    pickup_forks(t_data *data);
+void                    eating_time(t_data *data);
+void                    put_down_forks(t_data *data);
+
 uint64_t                time_data(void);
 uint64_t                my_atoi(const char *str);
+
+size_t                  ft_strlen(const char *s);
+
+int                     handle_errors(char const *str);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/23 23:41:39 by zainabdnaya       #+#    #+#              #
-#    Updated: 2021/04/27 21:21:20 by zainabdnaya      ###   ########.fr        #
+#    Updated: 2021/04/29 00:55:20 by zainabdnaya      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,11 @@ COMP= gcc
 
 
 SRC= philo_one.c\
+	mutex_forks_eat.c\
 	 ft_atoi.c\
 	  init.c\
 	  needed.c\
+	  print.c\
 
 
 OBJ_NAME= $(SRC:.c=.o)
