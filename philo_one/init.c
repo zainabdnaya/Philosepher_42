@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
+/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 20:39:14 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/01 03:32:48 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/01 16:47:51 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void    initial_data(int ac, char **av,t_data *data)
     while( i < data->nbr_philo)
     {
         data->philos[i] = (t_philo_state *)malloc(sizeof(t_philo_state));
-        data->philos[i]->is_sit_in = i;
+        data->philos[i]->is_sit_in = i + 1;
         data->philos[i]->right_fork = i;
 		data->philos[i]->left_fork = (i + 1) % data->nbr_philo;
         data->philos[i]->start = time;

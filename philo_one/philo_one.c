@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_one.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
+/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 16:31:16 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/05/01 04:30:07 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/01 17:06:21 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,10 @@ void creat_threads(t_data *data)
     while (i < data->nbr_philo)
     {
         philo = data->philos[i];
-        philo->forks = data->forks;
-        pthread_create(&id, NULL, (void *)cycle, (void *)philo);
+		usleep(100);
+		philo->forks = data->forks;
+		usleep(100);
+		pthread_create(&id, NULL, (void *)cycle, (void *)philo);
         pthread_detach(id);
         usleep(10);
         i++;
@@ -76,10 +78,10 @@ int main(int ac, char **av)
 
 	initial_data(ac, av, &data);
 	creat_threads(&data);
-	while (!dies)
+	while (1)
 	{
 
         // printf("[%i]\n",dies);
 	}
-	// destroy_mutex(&data);
+	destroy_mutex(&data);
 }
