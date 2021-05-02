@@ -6,7 +6,7 @@
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 16:31:16 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/05/02 16:36:13 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/05/02 17:03:16 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ void creat_threads(t_data *data)
     t_philo_state *philo;
 
     i = 0;
-    init_philos(data);
+    // init_philos(data);
     while (i < data->nbr_forks)
     {
         pthread_mutex_init(&data->forks[i],NULL);

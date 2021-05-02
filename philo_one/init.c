@@ -6,7 +6,7 @@
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 20:39:14 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/02 16:35:49 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/05/02 17:03:13 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void init_philos(t_data *data)
         data->philos[i]->is_death = data->is_death;
         i++;
     }
+
 }
 
 void    initial_data(int ac, char **av,t_data *data)
@@ -76,7 +77,6 @@ void    initial_data(int ac, char **av,t_data *data)
     pthread_mutex_init(&data->mtx_death, NULL);
     pthread_mutex_init(&data->msg, NULL);
     pthread_mutex_init(data->is_death, NULL);
+    init_philos(data);
 }
-
-
 
