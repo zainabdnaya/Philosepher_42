@@ -6,7 +6,7 @@
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 16:31:16 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/05/01 17:06:21 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/05/02 16:36:13 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,12 @@ void *cycle(void *arg)
     pthread_t id;
 
 	philo = (t_philo_state *)arg;
-    pthread_create(&id, NULL, (void *)death, (void *)philo);
+    if(pthread_create(&id, NULL, (void *)death, (void *)philo)!= 0)
+            		return ((void*)1);
+
     pthread_detach(id);
-    usleep(10);
-	while (1)
+    usleep(100);
+    while (1)
 	{
         display_msg(philo,1);
         pickup_forks(philo);
@@ -29,7 +31,6 @@ void *cycle(void *arg)
         put_down_forks(philo);
         usleep(100);
     }
-	arg = (void *)philo;
 	return (arg);
 }
 
@@ -40,7 +41,8 @@ void creat_threads(t_data *data)
     t_philo_state *philo;
 
     i = 0;
-    while( i < data->nbr_forks )
+    init_philos(data);
+    while (i < data->nbr_forks)
     {
         pthread_mutex_init(&data->forks[i],NULL);
         i++;
@@ -54,9 +56,11 @@ void creat_threads(t_data *data)
 		usleep(100);
 		pthread_create(&id, NULL, (void *)cycle, (void *)philo);
         pthread_detach(id);
-        usleep(10);
+        usleep(100);
         i++;
     }
+    usleep(100);
+    pthread_mutex_unlock(philo->is_death);
 }
 
 void destroy_mutex(t_data *data)
@@ -69,19 +73,22 @@ void destroy_mutex(t_data *data)
 		pthread_mutex_destroy(&data->forks[i]);
 		i++;
 	}
+    pthread_mutex_destroy(&data->mtx_death);
+    pthread_mutex_destroy(&data->msg);
+    pthread_mutex_destroy(&data->is_eating);
+    
 }
 
 int main(int ac, char **av)
 {
 	t_data data;
 	pthread_t test;
-
+    
+    check_error(ac, av);
 	initial_data(ac, av, &data);
 	creat_threads(&data);
 	while (1)
 	{
-
-        // printf("[%i]\n",dies);
 	}
 	destroy_mutex(&data);
 }

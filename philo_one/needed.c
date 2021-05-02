@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 16:44:07 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/04/29 02:29:34 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/01 21:48:15 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,20 @@ size_t	ft_strlen(const char *s)
 		i++;
 	}
 	return (i);
+}
+
+int		check_digit(const char *s)
+{
+	int i;
+
+	i = 0;
+	if (!s)
+		return (0);
+	while (s[i])
+	{
+		if (s[i] < '0' || s[i] > '9')
+			return (0);
+		i++;
+	}
+	return (1);
 }
