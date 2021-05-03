@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosepher.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 23:44:09 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/02 16:36:50 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/05/03 03:13:06 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,21 +24,26 @@
 # define  EAT '1'
 # define  SLEEP '2'
 
-  // pthread_mutex_t     is_death;
+// struct s_data;
 
 typedef struct s_pilo_state
 {
-    pthread_mutex_t     *forks;
+    // struct s_data       *s_data;
+
     int                 is_sleeping;
     int                 left_fork;
     int                 right_fork;
     int                 fork_nbr;
     int                 is_sit_in;
     char                status;
+    
+    pthread_mutex_t     *forks;
     pthread_mutex_t     is_eating;
     pthread_mutex_t     msg;
     pthread_mutex_t     mtx_death;
     pthread_mutex_t     *is_death;
+    pthread_mutex_t	    *philo_dead;
+
     uint64_t            start;
     uint64_t            last_meal; 
     uint64_t            die;
@@ -51,17 +56,22 @@ typedef struct s_pilo_state
 
 typedef struct s_data
 {
+    t_philo_state       *philos;
+  
     pthread_mutex_t     is_eating;
     pthread_mutex_t     msg;
     pthread_mutex_t     mtx_death;
     pthread_mutex_t     *is_death;
-    int nbr;
+    pthread_mutex_t     *forks;
+  	pthread_mutex_t	    *philo_dead;
+
+    int                 nbr;
     int                 death;
     int                 index;
+    
     unsigned int        nbr_forks;
     unsigned int        nbr_philo;
-    t_philo_state       **philos;
-    pthread_mutex_t     *forks;
+    
     uint64_t            t_die;
     uint64_t            t_eat;
     uint64_t            t_sleep;
@@ -75,9 +85,9 @@ void                    eating_time(t_philo_state   *data);
 void                    check_error(int ac, char **av);
 void                    put_down_forks(t_philo_state *philo);
 void                    init_philos(t_data *data);
-uint64_t time_data(void);
-uint64_t                my_atoi(const char *str);
 
+uint64_t                time_data(void);
+uint64_t                my_atoi(const char *str);
 size_t                  ft_strlen(const char *s);
 
 int                     handle_errors(char const *str);

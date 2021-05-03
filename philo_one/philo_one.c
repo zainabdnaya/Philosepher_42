@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_one.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 16:31:16 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/05/02 17:03:16 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/05/03 03:10:57 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void *cycle(void *arg)
         pickup_forks(philo);
         eating_time(philo);
         put_down_forks(philo);
-        usleep(100);
+        // usleep(100);
     }
 	return (arg);
 }
@@ -41,7 +41,6 @@ void creat_threads(t_data *data)
     t_philo_state *philo;
 
     i = 0;
-    // init_philos(data);
     while (i < data->nbr_forks)
     {
         pthread_mutex_init(&data->forks[i],NULL);
@@ -50,7 +49,7 @@ void creat_threads(t_data *data)
     i = 0;
     while (i < data->nbr_philo)
     {
-        philo = data->philos[i];
+        philo = &data->philos[i];
 		usleep(100);
 		philo->forks = data->forks;
 		usleep(100);
@@ -63,7 +62,7 @@ void creat_threads(t_data *data)
     pthread_mutex_unlock(philo->is_death);
 }
 
-void destroy_mutex(t_data *data)
+int  destroy_free(t_data *data)
 {
 	int i;
  
@@ -76,19 +75,20 @@ void destroy_mutex(t_data *data)
     pthread_mutex_destroy(&data->mtx_death);
     pthread_mutex_destroy(&data->msg);
     pthread_mutex_destroy(&data->is_eating);
+    pthread_mutex_destroy(data->philo_dead);
+    return(1);
     
 }
 
 int main(int ac, char **av)
 {
 	t_data data;
-	pthread_t test;
     
     check_error(ac, av);
 	initial_data(ac, av, &data);
+    pthread_mutex_lock(data.philo_dead);
 	creat_threads(&data);
-	while (1)
-	{
-	}
-	destroy_mutex(&data);
+    pthread_mutex_lock(data.philo_dead);
+    pthread_mutex_unlock(data.philo_dead);
+	destroy_free(&data);
 }
