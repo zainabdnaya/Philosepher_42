@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosepher.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
+/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 23:44:09 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/03 03:13:06 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/03 16:09:09 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,18 @@
 # define  EAT '1'
 # define  SLEEP '2'
 
-// struct s_data;
-
 typedef struct s_pilo_state
 {
-    // struct s_data       *s_data;
-
+    int                 idx;
+    int                 numbr;
     int                 is_sleeping;
     int                 left_fork;
     int                 right_fork;
     int                 fork_nbr;
+    int                 ph_nbr;
     int                 is_sit_in;
+    int                 done;
+
     char                status;
     
     pthread_mutex_t     *forks;
@@ -65,10 +66,10 @@ typedef struct s_data
     pthread_mutex_t     *forks;
   	pthread_mutex_t	    *philo_dead;
 
+    int                 index;
     int                 nbr;
     int                 death;
-    int                 index;
-    
+
     unsigned int        nbr_forks;
     unsigned int        nbr_philo;
     
@@ -84,7 +85,7 @@ void                    pickup_forks(t_philo_state  *data);
 void                    eating_time(t_philo_state   *data);
 void                    check_error(int ac, char **av);
 void                    put_down_forks(t_philo_state *philo);
-void                    init_philos(t_data *data);
+void                    free_ph(t_philo_state **philo);
 
 uint64_t                time_data(void);
 uint64_t                my_atoi(const char *str);

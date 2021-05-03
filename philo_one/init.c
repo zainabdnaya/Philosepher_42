@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
+/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 20:39:14 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/03 03:12:47 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/03 16:12:10 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,15 @@ void    check_error(int ac, char **av)
         handle_errors("Error: You should put just Numbers!\n");
     if (ac == 6 && !check_digit(av[5]))
         handle_errors("Error: You should put just Numbers!\n");
-    if (my_atoi(av[1]) < 0)
-        handle_errors("Error: The philosepher should be > 0!\n");
+    if (my_atoi(av[1]) < 0 || my_atoi(av[1]) > 200)
+        handle_errors("Error: The philosepher should be > 0 & not more than 200 strict!\n");
     if ( my_atoi(av[2]) <= 60 || my_atoi(av[3]) <= 60 || my_atoi(av[4]) <= 60 )
          handle_errors("Error: The av[2],av[3],av[4] should be >= 60!\n");
     if (ac == 6 && my_atoi(av[5]) <= 0)
         handle_errors("Error: The Round of eating should be > 0!\n");
-
 }
 
-void init_philos(t_data *data)
+void init_philos(char **av, t_data *data)
 {
     int i;
     unsigned long long time;
@@ -53,6 +52,11 @@ void init_philos(t_data *data)
         data->philos[i].msg = data->msg;
         data->philos[i].is_death = data->is_death;
         data->philos[i].philo_dead = data->philo_dead;
+        data->philos[i].numbr = data->nbr;
+        data->philos[i].done = 0;
+        data->philos[i].ph_nbr = (unsigned int)my_atoi(av[1]);
+        if (data->nbr != -1)
+            data->philos[i].idx = 0;
         i++;
     }
 
@@ -79,6 +83,6 @@ void    initial_data(int ac, char **av,t_data *data)
     pthread_mutex_init(&data->msg, NULL);
     pthread_mutex_init(data->is_death, NULL);
     pthread_mutex_init(data->philo_dead,NULL);
-    init_philos(data);
+    init_philos(av, data);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_one.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
+/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 16:31:16 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/05/03 03:10:57 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/03 15:59:33 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,18 @@ void *cycle(void *arg)
     pthread_t id;
 
 	philo = (t_philo_state *)arg;
+    // if ( nbr !)
     if(pthread_create(&id, NULL, (void *)death, (void *)philo)!= 0)
             		return ((void*)1);
 
     pthread_detach(id);
-    usleep(100);
+    usleep(10);
     while (1)
 	{
-        display_msg(philo,1);
         pickup_forks(philo);
         eating_time(philo);
         put_down_forks(philo);
-        // usleep(100);
+        display_msg(philo,1);
     }
 	return (arg);
 }
@@ -50,12 +50,12 @@ void creat_threads(t_data *data)
     while (i < data->nbr_philo)
     {
         philo = &data->philos[i];
-		usleep(100);
+		usleep(10);
 		philo->forks = data->forks;
-		usleep(100);
+		usleep(10);
 		pthread_create(&id, NULL, (void *)cycle, (void *)philo);
         pthread_detach(id);
-        usleep(100);
+        usleep(10);
         i++;
     }
     usleep(100);
@@ -67,17 +67,19 @@ int  destroy_free(t_data *data)
 	int i;
  
 	i = 0;
-	while (i < data->nbr_philo)
+    while (i < data->nbr_forks)
 	{
-		pthread_mutex_destroy(&data->forks[i]);
-		i++;
-	}
+        pthread_mutex_destroy(&data->forks[i]);
+        i++;
+    }
+    free(data->forks);
+    data->forks = NULL;
     pthread_mutex_destroy(&data->mtx_death);
     pthread_mutex_destroy(&data->msg);
     pthread_mutex_destroy(&data->is_eating);
     pthread_mutex_destroy(data->philo_dead);
-    return(1);
-    
+    free_ph(&data->philos);
+    return (1);
 }
 
 int main(int ac, char **av)
@@ -88,6 +90,10 @@ int main(int ac, char **av)
 	initial_data(ac, av, &data);
     pthread_mutex_lock(data.philo_dead);
 	creat_threads(&data);
+    // while(1)
+    // {
+        
+    // }
     pthread_mutex_lock(data.philo_dead);
     pthread_mutex_unlock(data.philo_dead);
 	destroy_free(&data);
