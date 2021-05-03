@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 20:39:14 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/03 16:12:10 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/05/03 22:44:04 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void init_philos(char **av, t_data *data)
         data->philos[i].done = 0;
         data->philos[i].ph_nbr = (unsigned int)my_atoi(av[1]);
         if (data->nbr != -1)
-            data->philos[i].idx = 0;
+             data->philos[i].idx = 0;
         i++;
     }
 
