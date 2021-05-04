@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_one.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
+/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 16:31:16 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/05/03 22:16:29 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/04 12:50:13 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@ void *cycle(void *arg)
     pthread_t id;
 
     philo = (t_philo_state *)arg;
-    // if ( nbr !)
     if (pthread_create(&id, NULL, (void *)death, (void *)philo) != 0)
         return ((void *)1);
 

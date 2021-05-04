@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
+/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 20:39:14 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/03 22:44:04 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/04 13:31:54 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void init_philos(char **av, t_data *data)
 
 void    initial_data(int ac, char **av,t_data *data)
 {
-
     data->nbr_philo = (unsigned int)my_atoi(av[1]);
     data->nbr_forks =  (unsigned int) my_atoi(av[1]);
     data->t_die = my_atoi(av[2]);
