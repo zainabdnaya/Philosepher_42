@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 14:57:33 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/06 00:47:00 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/06 18:38:46 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ void *death(void *dt)
                 break;
             }
         }
+        usleep(100);
         sem_post(data->mtx_death);
-        usleep(10);
     }
     return (data);
 }

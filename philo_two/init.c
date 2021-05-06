@@ -6,20 +6,11 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 13:06:20 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/05/06 00:50:56 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/06 18:34:15 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosepher.h"
-
-sem_t		*open_sem(unsigned int n, char *fd_name)
-{
-	sem_t	*sem;
-
-	sem_unlink(fd_name);
-	sem = sem_open(fd_name, O_CREAT, 0777, n);
-	return (sem);
-}
 
 void    check_error(int ac, char **av)
 {
@@ -38,6 +29,25 @@ void    check_error(int ac, char **av)
         handle_errors("Error: The Round of eating should be > 0!\n");
 }
 
+sem_t		*open_sem(unsigned int n, char *fd_name)
+{
+	sem_t	*semaphore;
+
+	sem_unlink(fd_name);
+	semaphore = sem_open(fd_name, O_CREAT, 0777, n);
+	return (semaphore);
+}
+
+
+void initial_sem(t_data *data)
+{
+    data->forks = open_sem(data->nbr_philo, "fork");
+    data->is_eating = open_sem( 1,"is_eating");
+    data->mtx_death = open_sem(1, "mtx_death");
+    data->msg = open_sem( 1 , "msg");
+    data->is_death = open_sem(  1, "is_death");
+    data->philo_dead = open_sem( 1 , "philo_dead");
+}
 void init_philos(char **av, t_data *data)
 {
     int i;
@@ -45,6 +55,7 @@ void init_philos(char **av, t_data *data)
     
     i = 0;
     time = time_data();
+    initial_sem(data);
     while (i < data->nbr_philo)
     {
         data->philos[i].is_sit_in = i + 1;
@@ -69,6 +80,7 @@ void init_philos(char **av, t_data *data)
 
 }
 
+
 void    initial_data(char **av,t_data *data)
 {
     data->nbr_philo = (unsigned int)my_atoi(av[1]);
@@ -81,11 +93,5 @@ void    initial_data(char **av,t_data *data)
     else
         data->nbr = -1;
     data->philos = (t_philo_state *)malloc(sizeof(*(data->philos)) * data->nbr_philo);
-    data->forks = open_sem(data->nbr_philo, "fork");
-    data->is_eating = open_sem( 1,"is_eating");
-    data->mtx_death = open_sem(1, "mtx_death");
-    data->msg = open_sem( 1 , "msg");
-    data->is_death = open_sem(  1, "is_death");
-    data->philo_dead = open_sem( 1 , "philo_dead");
     init_philos(av,data);
 } 

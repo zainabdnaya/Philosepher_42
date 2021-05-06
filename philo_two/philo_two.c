@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 13:06:34 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/05/06 00:59:25 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/06 18:33:29 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ void *cycle(void *arg)
     if (pthread_create(&id, NULL, (void *)death, (void *)philo) != 0)
         return ((void *)1);
     pthread_detach(id);
-    usleep(10);
     while (1)
     {
         pickup_forks(philo);
@@ -43,9 +42,7 @@ void creat_threads(t_data *data)
     while (i < data->nbr_philo)
     {
         philo = &data->philos[i];
-        usleep(10);
-        philo->forks = data->forks;
-        usleep(10);
+        usleep(5);
         pthread_create(&id, NULL, (void *)cycle, (void *)philo);
         pthread_detach(id);
         usleep(10);
@@ -56,20 +53,21 @@ void creat_threads(t_data *data)
 int destroy_free(t_data *data)
 {
     sem_close(data->forks);
-    sem_unlink("fork");
+    // sem_unlink("fork");
     sem_close(data->is_death);
-    sem_unlink("is_death");
+    // sem_unlink("is_death");
     sem_close(data->mtx_death);
-    sem_unlink("mtx_death");
+    // sem_unlink("mtx_death");
     sem_close(data->msg);
-    sem_unlink("msg");
+    // sem_unlink("msg");
     sem_close(data->is_eating);
-    sem_unlink("is_eating");
+    // sem_unlink("is_eating");
     sem_close(data->philo_dead);
-    sem_unlink("philo_dead");
+    // sem_unlink("philo_dead");
     free_ph(&data->philos);
     return (1);
 }
+
 
 int main(int ac, char **av)
 {
@@ -79,10 +77,6 @@ int main(int ac, char **av)
     initial_data(av, &data);
     sem_wait(data.philo_dead);
     creat_threads(&data);
-    // while(1)
-    // {
-
-    // }
     sem_wait(data.philo_dead);
     sem_post(data.philo_dead);
     destroy_free(&data);
