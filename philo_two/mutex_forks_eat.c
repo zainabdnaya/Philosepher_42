@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 14:56:14 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/06 00:07:03 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/06 00:50:44 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 
 void pickup_forks(t_philo_state *philo)
 {
-    if (sem_wait(philo->forks) == 0)
-        display_msg(philo, 4);
-    if (sem_wait(philo->forks) == 0)
-        display_msg(philo, 4);
+    sem_wait(philo->forks) ;
+    sem_wait(philo->forks) ;
+    display_msg(philo, 4);
+    display_msg(philo, 4);
 }
 
 void eating_time(t_philo_state *philo)

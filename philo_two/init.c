@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 13:06:20 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/05/06 00:18:22 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/06 00:50:56 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,11 @@ void    initial_data(char **av,t_data *data)
     else
         data->nbr = -1;
     data->philos = (t_philo_state *)malloc(sizeof(*(data->philos)) * data->nbr_philo);
-    data->is_eating = open_sem( data-> nbr_philo,"is_eating");
-    data->mtx_death = open_sem( 1 , "mtx_death");
+    data->forks = open_sem(data->nbr_philo, "fork");
+    data->is_eating = open_sem( 1,"is_eating");
+    data->mtx_death = open_sem(1, "mtx_death");
     data->msg = open_sem( 1 , "msg");
-    data->is_death = open_sem( 1 , "is_death");
+    data->is_death = open_sem(  1, "is_death");
     data->philo_dead = open_sem( 1 , "philo_dead");
     init_philos(av,data);
 } 
