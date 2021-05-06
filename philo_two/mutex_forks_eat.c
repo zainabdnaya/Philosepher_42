@@ -1,0 +1,44 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   mutex_forks_eat.c                                  :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/05/05 14:56:14 by zainabdnaya       #+#    #+#             */
+/*   Updated: 2021/05/06 00:07:03 by zainabdnaya      ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "philosepher.h"
+
+
+void pickup_forks(t_philo_state *philo)
+{
+    if (sem_wait(philo->forks) == 0)
+        display_msg(philo, 4);
+    if (sem_wait(philo->forks) == 0)
+        display_msg(philo, 4);
+}
+
+void eating_time(t_philo_state *philo)
+{
+    philo->status = EAT;
+    usleep(3);
+    sem_wait(philo->is_eating);
+    display_msg(philo, 2);
+    philo->last_meal = time_data();
+    usleep(1000 * (philo->eat));
+    if (philo->numbr != -1)
+        philo->idx++;
+    sem_post(philo->is_eating);
+    }
+
+void put_down_forks(t_philo_state *philo)
+{
+    sem_post(philo->forks);
+    sem_post(philo->forks);
+    usleep(5);
+    display_msg(philo, 3);
+    usleep(philo->sleep * 1000);
+}

@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+         #
+#    By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/04 12:57:11 by zdnaya            #+#    #+#              #
-#    Updated: 2021/05/04 13:09:19 by zdnaya           ###   ########.fr        #
+#    Updated: 2021/05/05 23:37:37 by zainabdnaya      ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,8 +18,10 @@ COMP= gcc
 
 
 SRC= philo_two.c\
-	 init.c\
+	mutex_forks_eat.c\
 	 my_atoi.c\
+	  init.c\
+	  print.c\
 	 
 
 
