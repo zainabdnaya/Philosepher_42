@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 12:58:10 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/05/06 00:06:17 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/07 02:02:08 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,6 @@ typedef struct s_pilo_state
     sem_t               *is_eating;
     sem_t               *msg;
     sem_t               *mtx_death;
-    sem_t               *is_death;
     sem_t               *philo_dead;
 
     uint64_t            start;
@@ -62,7 +61,6 @@ typedef struct s_data
     sem_t               *is_eating;
     sem_t               *msg;
     sem_t               *mtx_death;
-    sem_t               *is_death;
     sem_t               *forks;
   	sem_t	              *philo_dead;
 

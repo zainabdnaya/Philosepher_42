@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 13:06:34 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/05/06 18:33:29 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/07 02:03:41 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ void *cycle(void *arg)
         put_down_forks(philo);
         display_msg(philo, 1);
     }
-    sem_post(philo->is_death);
     return (arg);
 }
 
@@ -53,17 +52,15 @@ void creat_threads(t_data *data)
 int destroy_free(t_data *data)
 {
     sem_close(data->forks);
-    // sem_unlink("fork");
-    sem_close(data->is_death);
-    // sem_unlink("is_death");
+    sem_unlink("fork");
     sem_close(data->mtx_death);
-    // sem_unlink("mtx_death");
+    sem_unlink("mtx_death");
     sem_close(data->msg);
-    // sem_unlink("msg");
+    sem_unlink("msg");
     sem_close(data->is_eating);
-    // sem_unlink("is_eating");
+    sem_unlink("is_eating");
     sem_close(data->philo_dead);
-    // sem_unlink("philo_dead");
+    sem_unlink("philo_dead");
     free_ph(&data->philos);
     return (1);
 }

@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 14:56:14 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/06 00:50:44 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/07 01:44:08 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,13 +32,14 @@ void eating_time(t_philo_state *philo)
     if (philo->numbr != -1)
         philo->idx++;
     sem_post(philo->is_eating);
-    }
+}
 
 void put_down_forks(t_philo_state *philo)
 {
     sem_post(philo->forks);
     sem_post(philo->forks);
-    usleep(5);
+    
     display_msg(philo, 3);
+    philo->status = SLEEP;
     usleep(philo->sleep * 1000);
 }

@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 14:57:33 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/06 18:38:46 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/07 02:01:55 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,28 +42,28 @@ void *death(void *dt)
                 }
                 if (data->done == data->ph_nbr)
                 {
-                    sem_wait(data->is_death);
                     display_msg(data, 6);
                     sem_post(data->mtx_death);
                     sem_post(data->philo_dead);
                     break;
                 }
-                sem_post(data->mtx_death);
-                usleep(100);
             }
-            else if ((time_data() - data->last_meal > data->die && data->status != EAT))
+            else
             {
-                sem_wait(data->is_death);
-                display_msg(data, 5);
-                sem_post(data->mtx_death);
-                sem_post(data->philo_dead);
-                break;
+                if (((time_data() - data->last_meal > data->die)))
+                {
+                    display_msg(data, 5);
+                    sem_post(data->philo_dead);
+                    usleep(400);
+                    sem_post(data->mtx_death);
+                    // break;
+                }
             }
         }
-        usleep(100);
+        // usleep(100);
         sem_post(data->mtx_death);
     }
-    return (data);
+    return (NULL);
 }
 
 void display_msg(t_philo_state *data, int w)

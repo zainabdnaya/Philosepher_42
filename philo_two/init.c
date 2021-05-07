@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 13:06:20 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/05/06 18:34:15 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/07 01:53:59 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void initial_sem(t_data *data)
     data->is_eating = open_sem( 1,"is_eating");
     data->mtx_death = open_sem(1, "mtx_death");
     data->msg = open_sem( 1 , "msg");
-    data->is_death = open_sem(  1, "is_death");
+    // data->is_death = open_sem(  1, "is_death");
     data->philo_dead = open_sem( 1 , "philo_dead");
 }
 void init_philos(char **av, t_data *data)
@@ -68,7 +68,7 @@ void init_philos(char **av, t_data *data)
         data->philos[i].is_eating = data->is_eating;
         data->philos[i].mtx_death = data->mtx_death;
         data->philos[i].msg = data->msg;
-        data->philos[i].is_death = data->is_death;
+        // data->philos[i].is_death = data->is_death;
         data->philos[i].philo_dead = data->philo_dead;
         data->philos[i].numbr = data->nbr;
         data->philos[i].done = 0;
