@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 13:06:34 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/05/08 01:44:12 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/08 01:50:00 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,18 @@ int destroy_free(t_data *data)
         sem_post(data->forks);
     sem_close(data->forks);
     sem_unlink("forks");
-    if (sem_wait(data->msg) < 0)
+    if (sem_wait(data->msg) == 0)
         sem_post(data->msg);
     sem_close(data->msg);
     sem_unlink("msg");
-    // sem_close(data->philo_dead);
+    if (sem_wait(data->philo_dead) == 0)
+        sem_post(data->philo_dead);
+    sem_close(data->philo_dead);
+    sem_unlink("philo_dead");
+    if (sem_wait(data->mtx_death) == 0)
+        sem_post(data->mtx_death);
+    sem_close(data->mtx_death);
+    sem_unlink("mtx_dead");
     free_ph(&data->philos);
     exit(1);
 }
