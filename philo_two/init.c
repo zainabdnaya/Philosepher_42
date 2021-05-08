@@ -6,13 +6,13 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 13:06:20 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/05/07 01:53:59 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/08 01:01:14 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosepher.h"
 
-void    check_error(int ac, char **av)
+void check_error(int ac, char **av)
 {
     if (ac < 5 || ac > 6)
         handle_errors("Error: Less or more Arguments!\n");
@@ -29,33 +29,29 @@ void    check_error(int ac, char **av)
         handle_errors("Error: The Round of eating should be > 0!\n");
 }
 
-sem_t		*open_sem(unsigned int n, char *fd_name)
+sem_t *open_sem(unsigned int n, char *fd_name)
 {
-	sem_t	*semaphore;
+    sem_t *semaphore;
 
-	sem_unlink(fd_name);
-	semaphore = sem_open(fd_name, O_CREAT, 0777, n);
-	return (semaphore);
+    sem_unlink(fd_name);
+    semaphore = sem_open(fd_name, O_CREAT, 0777, n);
+    return (semaphore);
 }
-
 
 void initial_sem(t_data *data)
 {
     data->forks = open_sem(data->nbr_philo, "fork");
-    data->is_eating = open_sem( 1,"is_eating");
     data->mtx_death = open_sem(1, "mtx_death");
-    data->msg = open_sem( 1 , "msg");
-    // data->is_death = open_sem(  1, "is_death");
-    data->philo_dead = open_sem( 1 , "philo_dead");
+    data->msg = open_sem(1, "msg");
+    data->philo_dead = open_sem(1, "philo_dead");
 }
 void init_philos(char **av, t_data *data)
 {
     int i;
     unsigned long long time;
-    
+
     i = 0;
     time = time_data();
-    initial_sem(data);
     while (i < data->nbr_philo)
     {
         data->philos[i].is_sit_in = i + 1;
@@ -65,23 +61,17 @@ void init_philos(char **av, t_data *data)
         data->philos[i].eat = data->t_eat;
         data->philos[i].sleep = data->t_sleep;
         data->philos[i].round_eat = data->nbr;
-        data->philos[i].is_eating = data->is_eating;
-        data->philos[i].mtx_death = data->mtx_death;
-        data->philos[i].msg = data->msg;
-        // data->philos[i].is_death = data->is_death;
-        data->philos[i].philo_dead = data->philo_dead;
+
         data->philos[i].numbr = data->nbr;
         data->philos[i].done = 0;
         data->philos[i].ph_nbr = (unsigned int)my_atoi(av[1]);
         if (data->nbr != -1)
-             data->philos[i].idx = 0;
+            data->philos[i].idx = 0;
         i++;
     }
-
 }
 
-
-void    initial_data(char **av,t_data *data)
+void initial_data(char **av, t_data *data)
 {
     data->nbr_philo = (unsigned int)my_atoi(av[1]);
     data->nbr_forks = (unsigned int)my_atoi(av[1]);
@@ -92,6 +82,6 @@ void    initial_data(char **av,t_data *data)
         data->nbr = (unsigned int)my_atoi(av[5]);
     else
         data->nbr = -1;
-    data->philos = (t_philo_state *)malloc(sizeof(*(data->philos)) * data->nbr_philo);
-    init_philos(av,data);
-} 
+    data->philos = (t_philo_state *)malloc(sizeof((data->philos)) * data->nbr_philo);
+    init_philos(av, data);
+}

@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 14:56:14 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/07 01:44:08 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/08 00:56:32 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,11 @@ void eating_time(t_philo_state *philo)
 {
     philo->status = EAT;
     usleep(3);
-    sem_wait(philo->is_eating);
     display_msg(philo, 2);
     philo->last_meal = time_data();
     usleep(1000 * (philo->eat));
     if (philo->numbr != -1)
         philo->idx++;
-    sem_post(philo->is_eating);
 }
 
 void put_down_forks(t_philo_state *philo)

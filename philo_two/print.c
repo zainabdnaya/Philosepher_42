@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 14:57:33 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/07 02:01:55 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/08 01:03:41 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void *death(void *dt)
     while (1)
     {
         sem_wait(data->mtx_death);
-        {
             if ((data->numbr != -1))
             {
 
@@ -42,7 +41,10 @@ void *death(void *dt)
                 }
                 if (data->done == data->ph_nbr)
                 {
-                    display_msg(data, 6);
+                    sem_wait(data->msg);
+                    data->time = time_data() - data->start;
+        usleep(3);
+        printf("\033[31mAT %lld ms\t\t: STOP Stimulation! \n", data->time);
                     sem_post(data->mtx_death);
                     sem_post(data->philo_dead);
                     break;
@@ -50,20 +52,23 @@ void *death(void *dt)
             }
             else
             {
-                if (((time_data() - data->last_meal > data->die)))
+                
+                if ((time_data() - data->last_meal > data->die) && data->status != EAT)
                 {
-                    display_msg(data, 5);
-                    sem_post(data->philo_dead);
+                    sem_wait(data->msg);
+                    data->time = time_data() - data->start;
+                    // usleep(3);
+                    printf("\033[31mAT %lld ms\t\t:\u2620 Philosopher %d is DEATH\n", data->time, data->is_sit_in);                    // sem_post(data->msg);
+                    // sem_post(data->mtx_death);
                     usleep(400);
-                    sem_post(data->mtx_death);
-                    // break;
+                    sem_post(data->philo_dead);
+                    break;
                 }
             }
-        }
-        // usleep(100);
+        usleep(100);
         sem_post(data->mtx_death);
     }
-    return (NULL);
+    return (data);
 }
 
 void display_msg(t_philo_state *data, int w)
@@ -78,8 +83,9 @@ void display_msg(t_philo_state *data, int w)
     }
     else if (w == 2)
     {
-        usleep(3);
         printf("\033[32mAT %lld ms\t\t:Philosopher %d is eating\033[0m\n", time_data() - data->start, data->is_sit_in);
+        usleep(3);
+        data->status = EAT;
     }
     else if (w == 3)
     {
@@ -96,15 +102,15 @@ void display_msg(t_philo_state *data, int w)
     }
     else if (w == 5)
     {
-        data->time = time_data() - data->start;
-        usleep(3);
-        printf("\033[31mAT %lld ms\t\t:\u2620 Philosopher %d is DEATH\n", data->time, data->is_sit_in);
+        // data->time = time_data() - data->start;
+        // usleep(3);
+        // printf("\033[31mAT %lld ms\t\t:\u2620 Philosopher %d is DEATH\n", data->time, data->is_sit_in);
     }
     else if (w == 6)
     {
-        data->time = time_data() - data->start;
-        usleep(3);
-        printf("\033[31mAT %lld ms\t\t: STOP Stimulation! \n", data->time);
+        // data->time = time_data() - data->start;
+        // usleep(3);
+        // printf("\033[31mAT %lld ms\t\t: STOP Stimulation! \n", data->time);
     }
     sem_post(data->msg);
 }

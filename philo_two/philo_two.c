@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 13:06:34 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/05/07 02:03:41 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/08 01:07:19 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,33 +38,33 @@ void creat_threads(t_data *data)
     t_philo_state *philo;
 
     i = 0;
+
     while (i < data->nbr_philo)
     {
         philo = &data->philos[i];
-        usleep(5);
+        philo->forks = data->forks;
+        philo->is_eating = data->is_eating;
+        philo->mtx_death = data->mtx_death;
+        philo->msg = data->msg;
+        philo->philo_dead = data->philo_dead;
+        philo->start = time_data();
         pthread_create(&id, NULL, (void *)cycle, (void *)philo);
         pthread_detach(id);
-        usleep(10);
         i++;
     }
 }
 
 int destroy_free(t_data *data)
 {
-    sem_close(data->forks);
-    sem_unlink("fork");
-    sem_close(data->mtx_death);
-    sem_unlink("mtx_death");
-    sem_close(data->msg);
-    sem_unlink("msg");
-    sem_close(data->is_eating);
-    sem_unlink("is_eating");
-    sem_close(data->philo_dead);
-    sem_unlink("philo_dead");
+    // sem_close(data->forks);
+    // sem_unlink("forks");
+    // sem_close(data->msg);
+    // sem_post(data->philo_dead);
+    //     sem_post(data->philo_dead);
+    // sem_close(data->philo_dead);
     free_ph(&data->philos);
-    return (1);
+    exit(1);
 }
-
 
 int main(int ac, char **av)
 {
@@ -72,9 +72,10 @@ int main(int ac, char **av)
 
     check_error(ac, av);
     initial_data(av, &data);
+    
+     initial_sem(&data);
     sem_wait(data.philo_dead);
     creat_threads(&data);
     sem_wait(data.philo_dead);
-    sem_post(data.philo_dead);
     destroy_free(&data);
 }
