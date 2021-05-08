@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 14:57:33 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/08 01:39:39 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/08 02:23:15 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,9 +57,6 @@ void *death(void *dt)
                 {
                     sem_wait(data->msg);
                     data->time = time_data() - data->start;
-                    // usleep(3);
-                    
-
                     printf("\033[31mAT %lld ms\t\t:\u2620 Philosopher %d is DEATH\n", data->time, data->is_sit_in);                    // sem_post(data->msg);
                     sem_post(data->mtx_death);
                     usleep(400);
@@ -101,18 +98,6 @@ void display_msg(t_philo_state *data, int w)
         data->time = time_data() - data->start;
         usleep(3);
         printf("AT %lld ms\t\t:The philosepher \033[31m%d\033[0m is taking the FORK \n", data->time, data->is_sit_in);
-    }
-    else if (w == 5)
-    {
-        // data->time = time_data() - data->start;
-        // usleep(3);
-        // printf("\033[31mAT %lld ms\t\t:\u2620 Philosopher %d is DEATH\n", data->time, data->is_sit_in);
-    }
-    else if (w == 6)
-    {
-        // data->time = time_data() - data->start;
-        // usleep(3);
-        // printf("\033[31mAT %lld ms\t\t: STOP Stimulation! \n", data->time);
     }
     sem_post(data->msg);
 }
