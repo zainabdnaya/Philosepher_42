@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 13:06:34 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/05/08 01:07:19 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/08 01:44:12 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ void creat_threads(t_data *data)
     {
         philo = &data->philos[i];
         philo->forks = data->forks;
-        philo->is_eating = data->is_eating;
         philo->mtx_death = data->mtx_death;
         philo->msg = data->msg;
         philo->philo_dead = data->philo_dead;
@@ -56,11 +55,14 @@ void creat_threads(t_data *data)
 
 int destroy_free(t_data *data)
 {
-    // sem_close(data->forks);
-    // sem_unlink("forks");
-    // sem_close(data->msg);
-    // sem_post(data->philo_dead);
-    //     sem_post(data->philo_dead);
+    if (sem_wait(data->forks) == 0)
+        sem_post(data->forks);
+    sem_close(data->forks);
+    sem_unlink("forks");
+    if (sem_wait(data->msg) < 0)
+        sem_post(data->msg);
+    sem_close(data->msg);
+    sem_unlink("msg");
     // sem_close(data->philo_dead);
     free_ph(&data->philos);
     exit(1);

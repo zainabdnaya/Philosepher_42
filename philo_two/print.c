@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 14:57:33 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/08 01:03:41 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/08 01:39:39 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,8 +58,10 @@ void *death(void *dt)
                     sem_wait(data->msg);
                     data->time = time_data() - data->start;
                     // usleep(3);
+                    
+
                     printf("\033[31mAT %lld ms\t\t:\u2620 Philosopher %d is DEATH\n", data->time, data->is_sit_in);                    // sem_post(data->msg);
-                    // sem_post(data->mtx_death);
+                    sem_post(data->mtx_death);
                     usleep(400);
                     sem_post(data->philo_dead);
                     break;
