@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 20:25:57 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/08 23:38:44 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/09 00:38:57 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,8 @@ void initial_data(char **av, t_data *data)
     else
         data->nbr = -1;
     data->philos = (t_philo_state *)malloc(sizeof((data->philos)) * data->nbr_philo);
-        sem_wait(data->philo_dead);
+    initial_sem(data);
+
     init_philos(av, data);
 
 }
