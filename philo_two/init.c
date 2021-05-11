@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 13:06:20 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/05/08 20:49:01 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/11 00:00:20 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,6 @@ void init_philos(char **av, t_data *data)
         data->philos[i].eat = data->t_eat;
         data->philos[i].sleep = data->t_sleep;
         data->philos[i].round_eat = data->nbr;
-
         data->philos[i].numbr = data->nbr;
         data->philos[i].done = 0;
         data->philos[i].ph_nbr = (unsigned int)my_atoi(av[1]);
@@ -82,6 +81,6 @@ void initial_data(char **av, t_data *data)
         data->nbr = (unsigned int)my_atoi(av[5]);
     else
         data->nbr = -1;
-    data->philos = (t_philo_state *)malloc(sizeof((data->philos)) * data->nbr_philo);
+    data->philos = (t_philo_state*)malloc(sizeof(*(data->philos)) * data->nbr_philo); 
     init_philos(av, data);
 }

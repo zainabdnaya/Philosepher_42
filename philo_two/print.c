@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/05 14:57:33 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/08 22:32:11 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/11 00:31:10 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void *death(void *dt)
             i = 0;
             while (i < data->ph_nbr)
             {
-                if (data->idx >= data->numbr)
+                if (data->idx > data->numbr)
                     data->done++;
                 i++;
             }

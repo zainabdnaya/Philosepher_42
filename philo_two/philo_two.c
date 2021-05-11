@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 13:06:34 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/05/08 22:31:12 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/11 00:21:09 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ void creat_threads(t_data *data)
         philo->mtx_death = data->mtx_death;
         philo->msg = data->msg;
         philo->philo_dead = data->philo_dead;
-        philo->start = time_data();
         pthread_create(&id, NULL, (void *)cycle, (void *)philo);
         pthread_detach(id);
         i++;
