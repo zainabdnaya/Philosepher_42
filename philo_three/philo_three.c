@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 20:46:14 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/09 01:42:43 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/12 22:56:02 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ void creat_threads(t_data *data)
         waitpid(-1, NULL, 1);
         i++;
     }
+    // exit(1);
 }
 
 int destroy_free(t_data *data)
@@ -67,7 +68,7 @@ int destroy_free(t_data *data)
 
     while (i < data->nbr_philo)
     {
-        // kill(data->philos->pid, SIGKILL);
+        kill(data->philos->pid, SIGKILL);
         i++;
     }
     // free_ph(&data->philos);
@@ -82,10 +83,6 @@ int main(int ac, char **av)
     initial_data(av, &data);
     sem_wait(data.philo_dead);
     creat_threads(&data);
-    while(1)
-    {
-           
-    }
     sem_wait(data.philo_dead);
     destroy_free(&data);
 }

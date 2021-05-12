@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 20:25:57 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/09 00:38:57 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/10 23:55:18 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,8 @@ void initial_data(char **av, t_data *data)
         data->nbr = (unsigned int)my_atoi(av[5]);
     else
         data->nbr = -1;
-    data->philos = (t_philo_state *)malloc(sizeof((data->philos)) * data->nbr_philo);
+    data->philos = (t_philo_state*)malloc(sizeof(*(data->philos)) * data->nbr_philo); 
     initial_sem(data);
-
     init_philos(av, data);
 
 }

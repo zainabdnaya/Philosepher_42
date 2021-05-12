@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 21:04:22 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/09 00:40:04 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/12 22:11:44 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ void *death(void *dt)
     data = (t_philo_state *)dt;
     while (1)
     {
+
         sem_wait(data->mtx_death);
         if ((data->numbr != -1))
         {
@@ -63,6 +64,7 @@ void *death(void *dt)
                 sem_post(data->philo_dead);
                 break;
             }
+                // puts("here");
         }
         usleep(100);
         sem_post(data->mtx_death);
