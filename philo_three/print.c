@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 21:04:22 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/12 22:11:44 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/12 23:16:41 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ void *death(void *dt)
                 usleep(3);
                 printf("\033[31mAT %lld ms\t\t: STOP Stimulation! \n", data->time);
                 sem_post(data->mtx_death);
+                                usleep(400);
+
                 sem_post(data->philo_dead);
                 break;
             }
@@ -64,7 +66,6 @@ void *death(void *dt)
                 sem_post(data->philo_dead);
                 break;
             }
-                // puts("here");
         }
         usleep(100);
         sem_post(data->mtx_death);

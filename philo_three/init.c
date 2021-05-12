@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 20:25:57 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/10 23:55:18 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/12 23:18:27 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ sem_t *open_sem(unsigned int n, char *fd_name)
 
 void initial_sem(t_data *data)
 {
-    data->forks = open_sem(data->nbr_philo, "fork");
+    data->forks = open_sem(data->nbr_forks, "fork");
     data->mtx_death = open_sem(1, "mtx_death");
     data->msg = open_sem(1, "msg");
     data->philo_dead = open_sem(1, "philo_dead");

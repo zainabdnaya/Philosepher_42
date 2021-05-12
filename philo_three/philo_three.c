@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 20:46:14 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/12 22:56:02 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/12 23:01:29 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int destroy_free(t_data *data)
         kill(data->philos->pid, SIGKILL);
         i++;
     }
-    // free_ph(&data->philos);
+    free_ph(&data->philos);
     return (1);
 }
 
