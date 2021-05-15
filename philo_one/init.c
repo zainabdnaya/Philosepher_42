@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
+/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 20:39:14 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/05 23:41:35 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/15 09:48:54 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void    check_error(int ac, char **av)
         handle_errors("Error: Less or more Arguments!\n");
     if (!check_digit(av[1]) || !check_digit(av[2]) ||
         !check_digit(av[3]) || !check_digit(av[4]))
-        handle_errors("Error: You should put just Numbers!\n");
+        handle_errors("Error: You should put just Positive Numbers!\n");
     if (ac == 6 && !check_digit(av[5]))
         handle_errors("Error: You should put just Numbers!\n");
     if (my_atoi(av[1]) < 0 || my_atoi(av[1]) > 200)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosepher.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
+/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 12:58:10 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/05/08 20:54:31 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/15 09:35:22 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,8 +85,7 @@ void                    check_error(int ac, char **av);
 void                    put_down_forks(t_philo_state *philo);
 void                    free_ph(t_philo_state **philo);
 void                    *death(void *dt);
-
-void initial_sem(t_data *data);
+void                    initial_sem(t_data *data);
 
 uint64_t                time_data(void);
 uint64_t                my_atoi(const char *str);

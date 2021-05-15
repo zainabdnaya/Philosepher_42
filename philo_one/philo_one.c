@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_one.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
+/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 16:31:16 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/05/05 18:49:45 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/15 09:47:09 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,18 +85,14 @@ int destroy_free(t_data *data)
 }
 
 int main(int ac, char **av) 
-    {
-        t_data data;
+{
+    t_data data;
 
-        check_error(ac, av);
-        initial_data(ac, av, &data);
-        pthread_mutex_lock(data.philo_dead);
-        creat_threads(&data);
-        // while(1)
-        // {
-
-        // }
-        pthread_mutex_lock(data.philo_dead);
-        pthread_mutex_unlock(data.philo_dead);
-        destroy_free(&data);
-    }
+    check_error(ac, av);
+    initial_data(ac, av, &data);
+    pthread_mutex_lock(data.philo_dead);
+    creat_threads(&data);
+    pthread_mutex_lock(data.philo_dead);
+    pthread_mutex_unlock(data.philo_dead);
+    destroy_free(&data);
+}
