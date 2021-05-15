@@ -6,7 +6,7 @@
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 20:46:14 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/15 12:34:00 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/05/15 18:20:26 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,22 @@ void creat_threads(t_data *data)
     int i;
 
     i = 0;
+    pthread_t id;
+    void *arg;
+    t_philo_state *philo;
+    philo = data->philos;
+    if (data->nbr != -1)
+    {
+        if (pthread_create(&id, NULL, (void *)count_eat, (void *)philo) != 0)
+            return;
+    }
     while (i < data->nbr_philo)
     {
         data->philos[i].pid = fork();
+        // puts("i");
         if (data->philos[i].pid == 0)
         {
+            // puts("samir");
             cycle(&data->philos[i]);
             exit(0);
         }
@@ -60,6 +71,7 @@ int destroy_free(t_data *data)
 {
     int i;
     sem_unlink("forks");
+    sem_unlink("test");
     sem_unlink("msg");
     sem_unlink("philo_dead");
     sem_unlink("mtx_dead");

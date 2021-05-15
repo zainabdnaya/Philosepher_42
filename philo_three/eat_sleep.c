@@ -6,7 +6,7 @@
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 20:51:12 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/15 11:02:14 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/05/15 16:06:36 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 void pickup_forks(t_philo_state *philo)
 {
-    sem_wait(philo->forks) ;
-    sem_wait(philo->forks) ;
+    sem_wait(philo->forks);
+    sem_wait(philo->forks);
     display_msg(philo, 4);
     display_msg(philo, 4);
 }
@@ -27,8 +27,11 @@ void eating_time(t_philo_state *philo)
     display_msg(philo, 2);
     philo->last_meal = time_data();
     usleep(1000 * (philo->eat));
-    if (philo->numbr != -1)
-        philo->idx++;
+    // if (philo->numbr != -1)
+    {
+        // philo->idx++;
+        sem_post(philo->test);
+    }
 }
 
 void put_down_forks(t_philo_state *philo)

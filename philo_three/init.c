@@ -6,7 +6,7 @@
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 20:25:57 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/15 11:01:23 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/05/15 17:16:54 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ sem_t *open_sem(unsigned int n, char *fd_name)
 
 void initial_sem(t_data *data)
 {
+    data->test = open_sem(data->nbr_philo, "test");
     data->forks = open_sem(data->nbr_forks, "fork");
     data->mtx_death = open_sem(1, "mtx_death");
     data->msg = open_sem(1, "msg");
@@ -65,6 +66,7 @@ void init_philos(char **av, t_data *data)
         data->philos[i].mtx_death = data->mtx_death;
         data->philos[i].msg = data->msg;
         data->philos[i].philo_dead = data->philo_dead;
+        data->philos[i].test = data->test;
         data->philos[i].numbr = data->nbr;
         data->philos[i].done = 0;
         data->philos[i].ph_nbr = (unsigned int)my_atoi(av[1]);
