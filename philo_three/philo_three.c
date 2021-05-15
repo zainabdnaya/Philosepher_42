@@ -6,7 +6,7 @@
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 20:46:14 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/15 11:17:38 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/05/15 12:34:00 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,11 +49,11 @@ void creat_threads(t_data *data)
         i++;
     }
     i = 0;
-    while ( i < data->nbr_philo)
-    {
-        waitpid(-1, NULL, 1);
-        i++;
-    }
+    // while ( i < data->nbr_philo)
+    // {
+    //     waitpid(-1, NULL, 1);
+    //     i++;
+    // }
 }
 
 int destroy_free(t_data *data)
