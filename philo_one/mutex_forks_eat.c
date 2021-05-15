@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   mutex_forks_eat.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
+/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 00:24:48 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/03 23:27:19 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/15 12:13:43 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void put_down_forks(t_philo_state *philo)
 {
     pthread_mutex_unlock(&philo->forks[philo->right_fork]);
     pthread_mutex_unlock(&philo->forks[philo->left_fork]);
-    // usleep(5);
     display_msg(philo, 3);
     usleep(philo->sleep * 1000);
 }

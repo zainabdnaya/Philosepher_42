@@ -6,7 +6,7 @@
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 20:25:57 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/15 09:48:45 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/05/15 11:01:23 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,8 +70,6 @@ void init_philos(char **av, t_data *data)
         data->philos[i].ph_nbr = (unsigned int)my_atoi(av[1]);
         if (data->nbr != -1)
             data->philos[i].idx = 0;
-
-        
         i++;
     }
 }

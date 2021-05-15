@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   eat_sleep.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
+/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 20:51:12 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/08 20:56:16 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/15 11:02:14 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void put_down_forks(t_philo_state *philo)
 {
     sem_post(philo->forks);
     sem_post(philo->forks);
-    
     display_msg(philo, 3);
     philo->status = SLEEP;
     usleep(philo->sleep * 1000);

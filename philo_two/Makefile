@@ -6,7 +6,7 @@
 #    By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/15 10:05:49 by zdnaya            #+#    #+#              #
-#    Updated: 2021/05/15 10:09:47 by zdnaya           ###   ########.fr        #
+#    Updated: 2021/05/15 10:32:59 by zdnaya           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,7 +35,7 @@ all:			$(NAME)
 $(NAME) :  $(OBJ)
 	@rm -rf $(NAME)
 	@$(COMP) $(H_FLAG) $(OBJ) -o $@
-	@echo "\033[95m --------------------------- Philo_one has been created successfully ------------------------------\n\033[0m"                                                                                                                                                                    
+	@echo "\033[95m --------------------------- Philo_two has been created successfully ------------------------------\n\033[0m"                                                                                                                                                                    
 	@echo " PPPPPPPPPPPPPPPPP   hhhhhhh               iiii  lllllll                                                   tttt                                                               "
 	@echo " P::::::::::::::::P  h:::::h              i::::i l:::::l                                                ttt:::t                                                               "
 	@echo " P::::::PPPPPP:::::P h:::::h               iiii  l:::::l                                                t:::::t                                                               "

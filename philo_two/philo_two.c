@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_two.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
+/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 13:06:34 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/05/11 00:21:09 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/15 12:26:17 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void *cycle(void *arg)
 {
     t_philo_state *philo;
     pthread_t id;
+    int i;
 
     philo = (t_philo_state *)arg;
     if (pthread_create(&id, NULL, (void *)death, (void *)philo) != 0)
@@ -26,6 +27,30 @@ void *cycle(void *arg)
         pickup_forks(philo);
         eating_time(philo);
         put_down_forks(philo);
+        if ((philo->numbr != -1))
+        {
+            sem_wait(philo->mtx_death);
+
+            i = 0;
+            while (i < philo->ph_nbr)
+            {
+                if (philo->idx >= philo->numbr)
+                    philo->done++;
+                i++;
+            }
+            if (philo->done == philo->ph_nbr)
+            {
+                sem_wait(philo->msg);
+                philo->time = time_data() - philo->start;
+                usleep(3);
+                printf("\033[31mAT %lld ms\t\t: STOP Stimulation! \n", philo->time);
+                sem_post(philo->mtx_death);
+                sem_post(philo->philo_dead);
+                break;
+            }
+            usleep(100);
+            sem_post(philo->mtx_death);
+        }
         display_msg(philo, 1);
     }
     return (arg);

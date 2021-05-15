@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_three.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
+/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 20:46:14 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/12 23:01:29 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/15 11:17:38 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,9 @@ void *cycle(void *arg)
     while (1)
     {
         pickup_forks(philo);
+        sem_wait(philo->is_eating);
         eating_time(philo);
+        sem_post(philo->is_eating);
         put_down_forks(philo);
         display_msg(philo, 1);
     }
@@ -44,31 +46,28 @@ void creat_threads(t_data *data)
             cycle(&data->philos[i]);
             exit(0);
         }
-
-        // usleep(100);
         i++;
     }
     i = 0;
-    // while÷
     while ( i < data->nbr_philo)
     {
         waitpid(-1, NULL, 1);
         i++;
     }
-    // exit(1);
 }
 
 int destroy_free(t_data *data)
 {
-    int i = 0;
+    int i;
     sem_unlink("forks");
     sem_unlink("msg");
     sem_unlink("philo_dead");
     sem_unlink("mtx_dead");
 
+    i = 0;
     while (i < data->nbr_philo)
     {
-        kill(data->philos->pid, SIGKILL);
+        kill(data->philos[i].pid, SIGKILL);
         i++;
     }
     free_ph(&data->philos);

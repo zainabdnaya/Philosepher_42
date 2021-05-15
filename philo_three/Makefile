@@ -6,7 +6,7 @@
 #    By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/08 20:49:54 by zainabdnaya       #+#    #+#              #
-#    Updated: 2021/05/15 10:12:02 by zdnaya           ###   ########.fr        #
+#    Updated: 2021/05/15 10:32:15 by zdnaya           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,6 +22,7 @@ SRC= philo_three.c\
 	 my_atoi.c\
 	  init.c\
 	  print.c\
+	   death.c \
 	 
 
 
@@ -34,7 +35,7 @@ all:			$(NAME)
 $(NAME) :  $(OBJ)
 	@rm -rf $(NAME)
 	@$(COMP) $(H_FLAG) $(OBJ) -o $@
-	@echo "\033[95m --------------------------- Philo_one has been created successfully ------------------------------\n\033[0m"  
+	@echo "\033[95m --------------------------- philo_three has been created successfully ------------------------------\n\033[0m"  
 	@echo " PPPPPPPPPPPPPPPPP   hhhhhhh               iiii  lllllll                                                   tttt         hhhhhhh                                                                         "
 	@echo " P::::::::::::::::P  h:::::h              i::::i l:::::l                                                ttt:::t         h:::::h                                                                         "
 	@echo " P::::::PPPPPP:::::P h:::::h               iiii  l:::::l                                                t:::::t         h:::::h                                                                         "

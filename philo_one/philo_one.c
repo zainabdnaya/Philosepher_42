@@ -6,7 +6,7 @@
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 16:31:16 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/05/15 09:47:09 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/05/15 12:26:29 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,36 @@ void *cycle(void *arg)
     philo = (t_philo_state *)arg;
     if (pthread_create(&id, NULL, (void *)death, (void *)philo) != 0)
         return ((void *)1);
-
     pthread_detach(id);
     usleep(10);
+    int i;
     while (1)
     {
         pickup_forks(philo);
         eating_time(philo);
         put_down_forks(philo);
+        if ((philo->numbr != -1))
+        {
+            pthread_mutex_lock(&philo->mtx_death);
+
+            i = 0;
+            while (i < philo->ph_nbr)
+            {
+                if (philo->idx >= philo->numbr)
+                    philo->done++;
+                i++;
+            }
+            if (philo->done == philo->ph_nbr)
+            {
+                pthread_mutex_lock(philo->is_death);
+                display_msg(philo, 6);
+                pthread_mutex_unlock(&philo->mtx_death);
+                pthread_mutex_unlock(philo->philo_dead);
+                break;
+            }
+            pthread_mutex_unlock(&philo->mtx_death);
+            usleep(100);
+        }
         display_msg(philo, 1);
     }
     return (arg);
