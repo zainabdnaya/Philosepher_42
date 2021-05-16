@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 20:46:14 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/16 20:58:24 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/16 22:26:03 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ int destroy_free(t_data *data)
     sem_unlink("msg");
     sem_unlink("philo_dead");
     sem_unlink("mtx_dead");
-
     i = 0;
     while (i < data->nbr_philo)
     {

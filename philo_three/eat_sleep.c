@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 20:51:12 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/16 21:29:25 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/16 21:34:51 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void eating_time(t_philo_state *philo)
     philo->status = EAT;
     display_msg(philo, 2);
     philo->last_meal = time_data();
-    ft_putnbr_fd(philo->is_sit_in, 1);
     if (philo->numbr != -1)
     {
         philo->done++;
