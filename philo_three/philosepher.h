@@ -6,7 +6,7 @@
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 18:31:15 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/15 15:46:40 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/05/16 19:31:50 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 # define  THINKING '0'
 # define  EAT '1'
 # define  SLEEP '2'
+
+int a;
 typedef struct s_pilo_state
 {
     int                 idx;
@@ -90,8 +92,10 @@ void                    put_down_forks(t_philo_state *philo);
 void                    free_ph(t_philo_state **philo);
 void                    *death(void *dt);
 void                    initial_sem(t_data *data);
-void                    *count_eat(void *arg);
-uint64_t time_data(void);
+void ft_putnbr_fd(int n, int fd);
+
+void *count_eat(void *arg);
+uint64_t                time_data(void);
 uint64_t                my_atoi(const char *str);
 size_t                  ft_strlen(const char *s);
 sem_t                   *open_sem(unsigned int n, char *fd_name);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_three.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
+/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 20:46:14 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/15 22:50:47 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/16 19:32:42 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,7 @@ void *cycle(void *arg)
     while (1)
     {
         pickup_forks(philo);
-        sem_wait(philo->is_eating);
         eating_time(philo);
-        sem_post(philo->is_eating);
         put_down_forks(philo);
         display_msg(philo, 1);
     }
@@ -36,23 +34,23 @@ void *cycle(void *arg)
 void creat_threads(t_data *data)
 {
     int i;
+    pthread_t ip;
 
-    i = 0;
-    pthread_t id;
-    void *arg;
-    t_philo_state *philo;
-    philo = data->philos;
     if (data->nbr != -1)
     {
-        if (pthread_create(&id, NULL, (void *)count_eat, (void *)philo) != 0)
+        if (pthread_create(&ip, NULL, (void *)count_eat, (void *)(data->philos)) != 0)
             return;
+        pthread_detach(ip);
     }
+    i = 0;
     while (i < data->nbr_philo)
     {
+
         data->philos[i].pid = fork();
         if (data->philos[i].pid == 0)
         {
             cycle(&data->philos[i]);
+          
             exit(0);
         }
         i++;
@@ -67,6 +65,7 @@ int destroy_free(t_data *data)
     sem_unlink("msg");
     sem_unlink("philo_dead");
     sem_unlink("mtx_dead");
+    sem_unlink("eating");
 
     i = 0;
     while (i < data->nbr_philo)
@@ -75,7 +74,7 @@ int destroy_free(t_data *data)
         i++;
     }
     free_ph(&data->philos);
-    return (1);
+    return (0);
 }
 
 int main(int ac, char **av)
@@ -88,5 +87,5 @@ int main(int ac, char **av)
     creat_threads(&data);
     sem_wait(data.philo_dead);
     destroy_free(&data);
-    exit(0);
+    // getchar();
 }

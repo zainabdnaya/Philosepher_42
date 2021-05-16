@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
+/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 21:04:22 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/15 23:11:13 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/16 18:18:36 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,43 +47,40 @@ void display_msg(t_philo_state *data, int w)
     sem_wait(data->msg);
     if (w == 1)
     {
-        data->time = (int)(time_data() - data->start);
-        ft_putstr_fd("\095[94m AT ", 1);
-        ft_putnbr_fd(data->time, 1);
+        ft_putstr_fd("\033[0;34mAT ", 1);
+        ft_putnbr_fd((int)(time_data() - data->start), 1);
         ft_putstr_fd(" ms\t\t:Philosophe ", 1);
         ft_putnbr_fd(data->is_sit_in, 1);
-        ft_putstr_fd("is Thinking!\095[0m\n", 1);
+        ft_putstr_fd(" is Thinking! \n", 1);
         data->status = THINKING;
     }
     else if (w == 2)
     {
-        data->time = (int)(time_data() - data->start);
-        ft_putstr_fd("\033[93mAT ", 1);
-        ft_putnbr_fd(data->time, 1);
+        ft_putstr_fd("\033[33mAT ", 1);
+        ft_putnbr_fd((int)(time_data() - data->start), 1);
         ft_putstr_fd(" ms\t\t:Philosophe ", 1);
         ft_putnbr_fd(data->is_sit_in, 1);
-        ft_putstr_fd("is eatining\033[0m \n", 1);
+        ft_putstr_fd(" is Eating! \n", 1);
         data->status = EAT;
     }
     else if (w == 3)
     {
-        data->time = time_data() - data->start;
-        ft_putstr_fd("\033[94mAT ", 1);
-        ft_putnbr_fd(data->time, 1);
+        ft_putstr_fd("\033[32mAT ", 1);
+        ft_putnbr_fd((int)(time_data() - data->start), 1);
         ft_putstr_fd(" ms\t\t:Philosophe ", 1);
         ft_putnbr_fd(data->is_sit_in, 1);
-        ft_putstr_fd("is sleeping\033[0m\n", 1);
+        ft_putstr_fd(" is Sleeping \n", 1);
         data->status = SLEEP;
+        // usleep(100);
     }
     else if (w == 4)
     {
-        data->time = time_data() - data->start;
-        usleep(3);
-         ft_putstr_fd("\035[94mAT ", 1);
-        ft_putnbr_fd(data->time, 1);
+        ft_putstr_fd("\033[0;37mAT ", 1);
+        ft_putnbr_fd((int)(time_data() - data->start), 1);
         ft_putstr_fd(" ms\t\t:Philosophe ", 1);
         ft_putnbr_fd(data->is_sit_in, 1);
-        ft_putstr_fd("  is tacking fork!\035[0m\n", 1);
+        ft_putstr_fd("  is Tacking fork!\n", 1);
+        // usleep(100);
     }
     sem_post(data->msg);
 }

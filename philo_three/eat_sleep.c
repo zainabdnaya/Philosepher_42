@@ -6,7 +6,7 @@
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 20:51:12 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/15 16:06:36 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/05/16 19:37:11 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,17 @@ void pickup_forks(t_philo_state *philo)
 
 void eating_time(t_philo_state *philo)
 {
+
     philo->status = EAT;
-    usleep(3);
     display_msg(philo, 2);
     philo->last_meal = time_data();
     usleep(1000 * (philo->eat));
-    // if (philo->numbr != -1)
+        puts("==>");
+        ft_putnbr_fd(philo->is_sit_in, 1);
+        puts("\n<=");
+    if (philo->numbr != -1)
     {
-        // philo->idx++;
+        philo->done++;
         sem_post(philo->test);
     }
 }
