@@ -3,51 +3,87 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 21:04:22 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/15 10:31:24 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/05/15 23:11:13 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosepher.h"
 
-uint64_t time_data(void)
+void ft_putchar_fd(char c, int fd)
 {
-    static struct timeval tv;
-    gettimeofday(&tv, NULL);
-    return ((tv.tv_sec * (uint64_t)1000) + (tv.tv_usec / 1000));
+    write(fd, &c, 1);
 }
 
+void ft_putnbr_fd(int n, int fd)
+{
+    if (n < 0)
+    {
+        if (n == -2147483648)
+            ft_putstr_fd("-2147483648", fd);
+        else
+        {
+            n = n * (-1);
+            ft_putchar_fd('-', fd);
+            ft_putnbr_fd(n, fd);
+        }
+    }
+    else
+    {
+        if (n >= 10)
+        {
+            ft_putnbr_fd(n / 10, fd);
+            ft_putchar_fd(n % 10 + '0', fd);
+        }
+        else
+            ft_putchar_fd(n + '0', fd);
+    }
+}
 
 void display_msg(t_philo_state *data, int w)
 {
     sem_wait(data->msg);
     if (w == 1)
     {
-        data->time = time_data() - data->start;
-        printf("\033[94mAT %lld ms\t\t:Philosophe %d is Thinking!\033[0m\n", data->time, data->is_sit_in);
-        usleep(3);
+        data->time = (int)(time_data() - data->start);
+        ft_putstr_fd("\095[94m AT ", 1);
+        ft_putnbr_fd(data->time, 1);
+        ft_putstr_fd(" ms\t\t:Philosophe ", 1);
+        ft_putnbr_fd(data->is_sit_in, 1);
+        ft_putstr_fd("is Thinking!\095[0m\n", 1);
         data->status = THINKING;
     }
     else if (w == 2)
     {
-        printf("\033[32mAT %lld ms\t\t:Philosopher %d is eating\033[0m\n", time_data() - data->start, data->is_sit_in);
-        usleep(3);
+        data->time = (int)(time_data() - data->start);
+        ft_putstr_fd("\033[93mAT ", 1);
+        ft_putnbr_fd(data->time, 1);
+        ft_putstr_fd(" ms\t\t:Philosophe ", 1);
+        ft_putnbr_fd(data->is_sit_in, 1);
+        ft_putstr_fd("is eatining\033[0m \n", 1);
         data->status = EAT;
     }
     else if (w == 3)
     {
         data->time = time_data() - data->start;
-        printf("\033[32mAT %lld ms\t\t:Philosopher %d is sleeping\033[0m\n", data->time, data->is_sit_in);
-        usleep(3);
+        ft_putstr_fd("\033[94mAT ", 1);
+        ft_putnbr_fd(data->time, 1);
+        ft_putstr_fd(" ms\t\t:Philosophe ", 1);
+        ft_putnbr_fd(data->is_sit_in, 1);
+        ft_putstr_fd("is sleeping\033[0m\n", 1);
         data->status = SLEEP;
     }
     else if (w == 4)
     {
         data->time = time_data() - data->start;
         usleep(3);
-        printf("AT %lld ms\t\t:The philosepher \033[31m%d\033[0m is taking the FORK \n", data->time, data->is_sit_in);
+         ft_putstr_fd("\035[94mAT ", 1);
+        ft_putnbr_fd(data->time, 1);
+        ft_putstr_fd(" ms\t\t:Philosophe ", 1);
+        ft_putnbr_fd(data->is_sit_in, 1);
+        ft_putstr_fd("  is tacking fork!\035[0m\n", 1);
     }
     sem_post(data->msg);
 }

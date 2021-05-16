@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_three.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 20:46:14 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/15 18:20:26 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/05/15 22:50:47 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,21 +50,13 @@ void creat_threads(t_data *data)
     while (i < data->nbr_philo)
     {
         data->philos[i].pid = fork();
-        // puts("i");
         if (data->philos[i].pid == 0)
         {
-            // puts("samir");
             cycle(&data->philos[i]);
             exit(0);
         }
         i++;
     }
-    i = 0;
-    // while ( i < data->nbr_philo)
-    // {
-    //     waitpid(-1, NULL, 1);
-    //     i++;
-    // }
 }
 
 int destroy_free(t_data *data)
@@ -96,4 +88,5 @@ int main(int ac, char **av)
     creat_threads(&data);
     sem_wait(data.philo_dead);
     destroy_free(&data);
+    exit(0);
 }

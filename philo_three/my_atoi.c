@@ -3,14 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   my_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 13:08:21 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/05/04 13:10:32 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/05/15 22:53:06 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosepher.h"
+
+uint64_t time_data(void)
+{
+    static struct timeval tv;
+    gettimeofday(&tv, NULL);
+    return ((tv.tv_sec * (uint64_t)1000) + (tv.tv_usec / 1000));
+}
 
 int check_digit(const char *s)
 {
