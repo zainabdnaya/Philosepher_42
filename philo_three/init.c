@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 20:25:57 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/16 18:12:11 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/05/16 21:04:07 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ void initial_sem(t_data *data)
 {
     data->test = open_sem(0, "test");
     data->forks = open_sem(data->nbr_forks, "fork");
-    data->is_eating = open_sem(data->nbr_philo, "eating");
+    // data->is_eating = open_sem(data->nbr_philo, "eating");
     data->mtx_death = open_sem(1, "mtx_death");
     data->msg = open_sem(1, "msg");
     data->philo_dead = open_sem(1, "philo_dead");
@@ -67,7 +67,6 @@ void init_philos(char **av, t_data *data)
         data->philos[i].mtx_death = data->mtx_death;
         data->philos[i].msg = data->msg;
         data->philos[i].philo_dead = data->philo_dead;
-        data->philos[i].is_eating = data->is_eating;
         data->philos[i].test = data->test;
         data->philos[i].numbr = data->nbr;
         data->philos[i].done = 0;
@@ -93,3 +92,26 @@ void initial_data(char **av, t_data *data)
     initial_sem(data);
     init_philos(av, data);
 }
+
+
+//  # @echo "\033[95m --------------------------- philo_three has been created successfully ------------------------------\n\033[0m"  
+// 	# @echo " PPPPPPPPPPPPPPPPP   hhhhhhh               iiii  lllllll                                       tttt         hhhhhhh                                                                         "
+// 	# @echo " P::::::::::::::::P  h:::::h              i::::i l:::::l                                     ttt:::t         h:::::h                                                                         "
+// 	# @echo " P::::::PPPPPP:::::P h:::::h               iiii  l:::::l                                     t:::::t         h:::::h                                                                         "
+// 	# @echo " PP:::::P     P:::::Ph:::::h                     l:::::l                                     t:::::t         h:::::h                                                                         "
+// 	# @echo "   P::::P     P:::::P h::::h hhhhh       iiiiiii  l::::l    ooooooooooo                ttttttt:::::ttttttt    h::::h hhhhh      rrrrr   rrrrrrrrr       eeeeeeeeeeee        eeeeeeeeeeee     "
+// 	# @echo "   P::::P     P:::::P h::::hh:::::hhh    i:::::i  l::::l  oo:::::::::::oo              t:::::::::::::::::t    h::::hh:::::hhh   r::::rrr:::::::::r    ee::::::::::::ee    ee::::::::::::ee   "
+// 	# @echo "   P::::PPPPPP:::::P  h::::::::::::::hh   i::::i  l::::l o:::::::::::::::o             t:::::::::::::::::t    h::::::::::::::hh r:::::::::::::::::r  e::::::eeeee:::::ee e::::::eeeee:::::ee "
+// 	# @echo "   P:::::::::::::PP   h:::::::hhh::::::h  i::::i  l::::l o:::::ooooo:::::o             tttttt:::::::tttttt    h:::::::hhh::::::hrr::::::rrrrr::::::re::::::e     e:::::ee::::::e     e:::::e "
+// 	# @echo "   P::::PPPPPPPPP     h::::::h   h::::::h i::::i  l::::l o::::o     o::::o                   t:::::t          h::::::h   h::::::hr:::::r     r:::::re:::::::eeeee::::::ee:::::::eeeee::::::e "
+// 	# @echo "   P::::P             h:::::h     h:::::h i::::i  l::::l o::::o     o::::o                   t:::::t          h:::::h     h:::::hr:::::r     rrrrrrre:::::::::::::::::e e:::::::::::::::::e  "
+// 	# @echo "   P::::P             h:::::h     h:::::h i::::i  l::::l o::::o     o::::o                   t:::::t          h:::::h     h:::::hr:::::r            e::::::eeeeeeeeeee  e::::::eeeeeeeeeee   "
+// 	# @echo "   P::::P             h:::::h     h:::::h i::::i  l::::l o::::o     o::::o                   t:::::t    tttttth:::::h     h:::::hr:::::r            e:::::::e           e:::::::e            "
+// 	# @echo " PP::::::PP           h:::::h     h:::::hi::::::il::::::lo:::::ooooo:::::o                   t::::::tttt:::::th:::::h     h:::::hr:::::r            e::::::::e          e::::::::e           "
+// 	# @echo " P::::::::P           h:::::h     h:::::hi::::::il::::::lo:::::::::::::::o                   tt::::::::::::::th:::::h     h:::::hr:::::r             e::::::::eeeeeeee   e::::::::eeeeeeee   "
+// 	# @echo " P::::::::P           h:::::h     h:::::hi::::::il::::::l oo:::::::::::oo                      tt:::::::::::tth:::::h     h:::::hr:::::r              ee:::::::::::::e    ee:::::::::::::e   "
+// 	# @echo " PPPPPPPPPP           hhhhhhh     hhhhhhhiiiiiiiillllllll   ooooooooooo                          ttttttttttt  hhhhhhh     hhhhhhhrrrrrrr                eeeeeeeeeeeeee      eeeeeeeeeeeeee   "
+// 	# @echo "                                                                          ________________________                                                                                                      "
+// 	# @echo "                                                                          _::::::::::::::::::::::_                                                                                                      "
+// 	# @echo "                                                                          ________________________                                                                                                      "                                                                                                                                               
+// 	# @echo " \033[95m \t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t Made by : Zdnaya \033[0m"

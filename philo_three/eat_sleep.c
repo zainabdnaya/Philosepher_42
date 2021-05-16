@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   eat_sleep.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 20:51:12 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/16 19:37:11 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/05/16 21:29:25 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,13 @@ void eating_time(t_philo_state *philo)
     philo->status = EAT;
     display_msg(philo, 2);
     philo->last_meal = time_data();
-    usleep(1000 * (philo->eat));
-        puts("==>");
-        ft_putnbr_fd(philo->is_sit_in, 1);
-        puts("\n<=");
+    ft_putnbr_fd(philo->is_sit_in, 1);
     if (philo->numbr != -1)
     {
         philo->done++;
         sem_post(philo->test);
     }
+    usleep(1000 * (philo->eat));
 }
 
 void put_down_forks(t_philo_state *philo)

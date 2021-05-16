@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_three.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 20:46:14 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/16 19:32:42 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/05/16 20:58:24 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,6 @@ void creat_threads(t_data *data)
         if (data->philos[i].pid == 0)
         {
             cycle(&data->philos[i]);
-          
             exit(0);
         }
         i++;
@@ -65,7 +64,6 @@ int destroy_free(t_data *data)
     sem_unlink("msg");
     sem_unlink("philo_dead");
     sem_unlink("mtx_dead");
-    sem_unlink("eating");
 
     i = 0;
     while (i < data->nbr_philo)

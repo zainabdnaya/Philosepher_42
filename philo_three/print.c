@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/08 21:04:22 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/16 18:18:36 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/05/16 21:00:00 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ void display_msg(t_philo_state *data, int w)
         ft_putnbr_fd(data->is_sit_in, 1);
         ft_putstr_fd(" is Sleeping \n", 1);
         data->status = SLEEP;
-        // usleep(100);
     }
     else if (w == 4)
     {
@@ -80,7 +79,6 @@ void display_msg(t_philo_state *data, int w)
         ft_putstr_fd(" ms\t\t:Philosophe ", 1);
         ft_putnbr_fd(data->is_sit_in, 1);
         ft_putstr_fd("  is Tacking fork!\n", 1);
-        // usleep(100);
     }
     sem_post(data->msg);
 }
