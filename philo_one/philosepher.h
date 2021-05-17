@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosepher.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
+/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/23 23:44:09 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/03 21:10:08 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/17 18:30:50 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,7 @@ typedef struct s_pilo_state
     char                status;
     
     pthread_mutex_t     *forks;
-    pthread_mutex_t     is_eating;
-    pthread_mutex_t     msg;
+    pthread_mutex_t     *msg;
     pthread_mutex_t     mtx_death;
     pthread_mutex_t     *is_death;
     pthread_mutex_t	    *philo_dead;
@@ -59,8 +58,7 @@ typedef struct s_data
 {
     t_philo_state       *philos;
   
-    pthread_mutex_t     is_eating;
-    pthread_mutex_t     msg;
+    pthread_mutex_t     *msg;
     pthread_mutex_t     mtx_death;
     pthread_mutex_t     *is_death;
     pthread_mutex_t     *forks;
@@ -79,7 +77,7 @@ typedef struct s_data
 } t_data;
 
 void                    ft_putstr_fd(char *s, int fd);
-void                    initial_data(int ac, char **av,t_data *data);
+void                    initial_data( char **av,t_data *data);
 void                    display_msg(t_philo_state *data, int w);
 void                    pickup_forks(t_philo_state  *data);
 void                    eating_time(t_philo_state   *data);

@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 19:56:53 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/04/24 20:34:29 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/17 11:58:08 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static int	operation(const char *str, long lenght, int sign)
 	return (sign * r);
 }
 
-uint64_t			my_atoi(const char *str)
+uint64_t	my_atoi(const char *str)
 {
 	long		lenght;
 	int			sign;
@@ -43,16 +43,16 @@ uint64_t			my_atoi(const char *str)
 	lenght = 0;
 	sign = 1;
 	while (str[lenght] == ' ' || str[lenght] == '\n' || str[lenght] == '\t'
-			|| str[lenght] == '\r' || str[lenght] == '\f'
-			|| str[lenght] == '\v')
+		|| str[lenght] == '\r' || str[lenght] == '\f'
+		|| str[lenght] == '\v')
 		lenght++;
 	if (str[lenght] == '-' || str[lenght] == '+')
 	{
 		if (str[lenght] == '-')
-        {
-            ft_putstr_fd("Error: It should be Positive\n", 1);
-            exit(1);
-        } 
+		{
+			ft_putstr_fd("Error: It should be Positive\n", 1);
+			exit(1);
+		}
 		lenght++;
 	}
 	return (operation(str, lenght, sign));

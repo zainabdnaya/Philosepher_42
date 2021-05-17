@@ -6,7 +6,7 @@
 #    By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/04/23 23:41:39 by zainabdnaya       #+#    #+#              #
-#    Updated: 2021/05/15 10:32:38 by zdnaya           ###   ########.fr        #
+#    Updated: 2021/05/17 11:27:03 by zdnaya           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME= philo_one
 OBJ_PATH= obj
 H_FLAG= -I ./philosepher.h
 COMP= gcc
-# FLAGS= -Wall -Wextra -Werror
+FLAGS= -Wall -Wextra -Werror
 
 
 SRC= philo_one.c\
