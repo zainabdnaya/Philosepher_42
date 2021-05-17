@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 20:39:14 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/15 09:48:54 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/05/17 02:19:38 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,10 +48,10 @@ void init_philos(char **av, t_data *data)
         data->philos[i].sleep = data->t_sleep;
         data->philos[i].round_eat = data->nbr;
         data->philos[i].is_eating = data->is_eating;
-        data->philos[i].mtx_death = data->mtx_death;
-        data->philos[i].msg = data->msg;
+        // data->philos[i].mtx_death = data->mtx_death;
+        // data->philos[i].msg = data->msg;
         data->philos[i].is_death = data->is_death;
-        data->philos[i].philo_dead = data->philo_dead;
+        // data->philos[i].philo_dead = data->philo_dead;
         data->philos[i].numbr = data->nbr;
         data->philos[i].done = 0;
         data->philos[i].ph_nbr = (unsigned int)my_atoi(av[1]);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_one.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 16:31:16 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/05/15 12:26:29 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/05/17 02:31:11 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void *cycle(void *arg)
     {
         pickup_forks(philo);
         eating_time(philo);
-        put_down_forks(philo);
         if ((philo->numbr != -1))
         {
             pthread_mutex_lock(&philo->mtx_death);
@@ -39,17 +38,20 @@ void *cycle(void *arg)
                     philo->done++;
                 i++;
             }
-            if (philo->done == philo->ph_nbr)
+            if (philo->done > philo->ph_nbr)
             {
                 pthread_mutex_lock(philo->is_death);
-                display_msg(philo, 6);
+                pthread_mutex_lock(&philo->msg);
+                usleep(3);
+                printf("\033[31mAT %lld ms\t\t: STOP Stimulation! \n", time_data() - philo->start);
                 pthread_mutex_unlock(&philo->mtx_death);
                 pthread_mutex_unlock(philo->philo_dead);
                 break;
             }
-            pthread_mutex_unlock(&philo->mtx_death);
             usleep(100);
+            pthread_mutex_unlock(&philo->mtx_death);
         }
+        put_down_forks(philo);
         display_msg(philo, 1);
     }
     return (arg);
@@ -71,9 +73,10 @@ void creat_threads(t_data *data)
     while (i < data->nbr_philo)
     {
         philo = &data->philos[i];
-        usleep(10);
         philo->forks = data->forks;
-        usleep(10);
+        philo->mtx_death = data->mtx_death;
+        philo->msg = data->msg;
+        philo->philo_dead = data->philo_dead;
         pthread_create(&id, NULL, (void *)cycle, (void *)philo);
         pthread_detach(id);
         usleep(10);
@@ -106,7 +109,7 @@ int destroy_free(t_data *data)
     return (1);
 }
 
-int main(int ac, char **av) 
+int main(int ac, char **av)
 {
     t_data data;
 
@@ -115,6 +118,5 @@ int main(int ac, char **av)
     pthread_mutex_lock(data.philo_dead);
     creat_threads(&data);
     pthread_mutex_lock(data.philo_dead);
-    pthread_mutex_unlock(data.philo_dead);
     destroy_free(&data);
 }
