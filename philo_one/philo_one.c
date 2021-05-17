@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 16:31:16 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/05/17 02:31:11 by zainabdnaya      ###   ########.fr       */
+/*   Updated: 2021/05/17 02:46:37 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ void *cycle(void *arg)
     {
         pickup_forks(philo);
         eating_time(philo);
+        put_down_forks(philo);
         if ((philo->numbr != -1))
         {
             pthread_mutex_lock(&philo->mtx_death);
@@ -34,11 +35,11 @@ void *cycle(void *arg)
             i = 0;
             while (i < philo->ph_nbr)
             {
-                if (philo->idx >= philo->numbr)
+                if (philo->idx > philo->numbr)
                     philo->done++;
                 i++;
             }
-            if (philo->done > philo->ph_nbr)
+            if (philo->done == philo->ph_nbr)
             {
                 pthread_mutex_lock(philo->is_death);
                 pthread_mutex_lock(&philo->msg);
@@ -51,7 +52,6 @@ void *cycle(void *arg)
             usleep(100);
             pthread_mutex_unlock(&philo->mtx_death);
         }
-        put_down_forks(philo);
         display_msg(philo, 1);
     }
     return (arg);

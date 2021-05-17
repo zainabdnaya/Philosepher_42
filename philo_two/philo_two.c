@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo_two.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
+/*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 13:06:34 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/05/15 12:26:17 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/05/17 02:40:53 by zainabdnaya      ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void *cycle(void *arg)
             i = 0;
             while (i < philo->ph_nbr)
             {
-                if (philo->idx >= philo->numbr)
+                if (philo->idx > philo->numbr)
                     philo->done++;
                 i++;
             }
