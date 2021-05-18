@@ -6,7 +6,7 @@
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 12:58:10 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/05/18 17:19:51 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/05/18 17:46:38 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void		put_down_forks(t_philo_state *philo);
 void		free_ph(t_philo_state **philo);
 void		*death(void *dt);
 void		initial_sem(t_data *data);
+void		loop1(t_philo_state *philo);
 uint64_t	time_data(void);
 uint64_t	my_atoi(const char *str);
 sem_t		*open_sem(unsigned int n, char *fd_name);
