@@ -6,7 +6,7 @@
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 13:06:34 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/05/18 18:20:53 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/05/19 11:21:27 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ void	*cycle(void *arg)
 
 void	creat_threads(t_data *data)
 {
-	int				i;
+	unsigned int	i;
 	pthread_t		id;
 	t_philo_state	*philo;
 
@@ -84,7 +84,7 @@ void	creat_threads(t_data *data)
 
 int	destroy_free(t_data *data)
 {
-	int	i;
+	unsigned int	i;
 
 	sem_unlink("forks");
 	sem_unlink("msg");

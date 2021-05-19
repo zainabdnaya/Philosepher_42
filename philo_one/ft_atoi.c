@@ -6,7 +6,7 @@
 /*   By: zainabdnayagmail.com <zainabdnayagmail.    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 19:56:53 by zainabdnaya       #+#    #+#             */
-/*   Updated: 2021/05/17 11:58:08 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/05/19 09:01:05 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,8 @@ uint64_t	my_atoi(const char *str)
 	{
 		if (str[lenght] == '-')
 		{
-			ft_putstr_fd("Error: It should be Positive\n", 1);
-			exit(1);
+			ft_putstr_fd("Error: It should be Positive Integer\n", 1);
+			return (1);
 		}
 		lenght++;
 	}

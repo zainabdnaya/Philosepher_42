@@ -6,7 +6,7 @@
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/24 16:31:16 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/05/18 16:43:06 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/05/19 11:25:38 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,14 @@ void	*loop(void *dt)
 	while (1)
 	{
 		pthread_mutex_lock(&philo->mtx_death);
-		if (philo->idx >= philo->numbr * philo->ph_nbr)
+		if (philo->idx >= philo->numbr)
+			philo->done++;
+		if (philo->done == philo->ph_nbr)
 		{
 			pthread_mutex_lock(philo->is_death);
 			pthread_mutex_lock(philo->msg);
 			printf("\033[31mAT %lld ms\t\t: STOP Stimulation!\n",
-				time_data() - philo->start);
+				   time_data() - philo->start);
 			pthread_mutex_unlock(&philo->mtx_death);
 			pthread_mutex_unlock(philo->philo_dead);
 			break ;
@@ -53,6 +55,7 @@ void	*cycle(void *arg)
 		pthread_detach(ip);
 	}
 	philo->idx = 0;
+	philo->done = 0;
 	while (1)
 	{
 		display_msg(philo, 1);
@@ -102,7 +105,12 @@ int	destroy_free(t_data *data)
 	pthread_mutex_destroy(&data->mtx_death);
 	pthread_mutex_destroy(data->msg);
 	pthread_mutex_destroy(data->philo_dead);
-	free_ph(&data->philos);
+	i = 0;
+	while (i < data->nbr_philo)
+	{
+		free_ph(&data->philos);
+		i++;
+	}
 	return (1);
 }
 

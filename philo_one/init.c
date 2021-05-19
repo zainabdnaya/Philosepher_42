@@ -6,7 +6,7 @@
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:42:28 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/05/18 16:33:30 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/05/19 11:25:15 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@ void	init_philos(char **av, t_data *data, uint64_t time, unsigned int i)
 		data->philos[i].sleep = data->t_sleep;
 		data->philos[i].round_eat = data->nbr;
 		data->philos[i].numbr = data->nbr;
-		data->philos[i].done = 0;
 		data->philos[i].ph_nbr = (unsigned int)my_atoi(av[1]);
 		data->philos[i].is_death = data->is_death;
 		data->philos[i].mtx_death = data->mtx_death;
@@ -57,27 +56,42 @@ void	init_philos(char **av, t_data *data, uint64_t time, unsigned int i)
 	}
 }
 
-void	initial_data(char **av, t_data *data)
+void	allocate(t_data *data)
 {
-	unsigned int		i;
-	uint64_t			time;
-
-	data->nbr_philo = (unsigned int)my_atoi(av[1]);
-	data->nbr_forks = (unsigned int) my_atoi(av[1]);
-	data->t_die = my_atoi(av[2]);
-	data->t_eat = (unsigned int) my_atoi(av[3]);
-	data->t_sleep = my_atoi(av[4]);
-	if (av[5])
-		data->nbr = (unsigned int) my_atoi(av[5]);
-	else
-		data->nbr = -1;
 	data->philos = (t_philo_state *)
 		malloc(sizeof(*(data->philos)) * data->nbr_philo);
+	if (!data->philos)
+		return ;
 	data->forks = (pthread_mutex_t *)
 		malloc(sizeof(pthread_mutex_t) * (data->nbr_forks));
+	if (!data->forks)
+		return ;
 	data->is_death = malloc(sizeof(pthread_mutex_t));
+	if (!data->is_death)
+		return ;
 	data->philo_dead = malloc(sizeof(pthread_mutex_t));
+	if (!data->philo_dead)
+		return ;
 	data->msg = malloc(sizeof(pthread_mutex_t));
+	if (!data->msg)
+		return ;
+}
+
+void	initial_data(char **av, t_data *data)
+{
+	unsigned int	i;
+	uint64_t		time;
+
+	data->nbr_philo = (unsigned int)my_atoi(av[1]);
+	data->nbr_forks = (unsigned int)my_atoi(av[1]);
+	data->t_die = my_atoi(av[2]);
+	data->t_eat = (unsigned int)my_atoi(av[3]);
+	data->t_sleep = my_atoi(av[4]);
+	if (av[5])
+		data->nbr = (unsigned int)my_atoi(av[5]);
+	else
+		data->nbr = -1;
+	allocate(data);
 	pthread_mutex_init(&data->mtx_death, NULL);
 	i = 0;
 	time = 0;

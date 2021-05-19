@@ -6,7 +6,7 @@
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/15 10:02:14 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/05/18 18:13:59 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/05/19 09:36:24 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 void	*death(void *dt)
 {
 	t_philo_state	*data;
-	u_int64_t		t;
-	int				i;
 
 	data = (t_philo_state *)dt;
 	while (1)
@@ -26,11 +24,12 @@ void	*death(void *dt)
 		{
 			sem_wait(data->msg);
 			data->time = time_data() - data->start;
-			printf("\033[31mAT %lld ms\t\t:\u2620 Philosopher %d is DEATH\n", data->time, data->is_sit_in); // sem_post(data->msg);
+			printf("\033[31mAT %lld ms\t\t:\u2620 Philosopher %d is DEATH\n",
+				data->time, data->is_sit_in);
 			sem_post(data->mtx_death);
 			usleep(400);
 			sem_post(data->philo_dead);
-			break;
+			break ;
 		}
 		usleep(100);
 		sem_post(data->mtx_death);

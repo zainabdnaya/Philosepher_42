@@ -6,7 +6,7 @@
 #    By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/05/15 10:05:49 by zdnaya            #+#    #+#              #
-#    Updated: 2021/05/18 17:37:41 by zdnaya           ###   ########.fr        #
+#    Updated: 2021/05/19 09:33:05 by zdnaya           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME= philo_two
 OBJ_PATH= obj
 H_FLAG= -I ./philosepher.h
 COMP= gcc
-# FLAGS= -Wall -Wextra -Werror
+FLAGS= -Wall -Wextra -Werror
 
 
 SRC= philo_two.c\

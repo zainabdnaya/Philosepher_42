@@ -6,49 +6,50 @@
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 13:06:20 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/05/18 17:33:30 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/05/19 11:26:36 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosepher.h"
 
-void check_error(int ac, char **av)
+void 	check_error(int ac, char **av)
 {
 	if (ac < 5 || ac > 6)
 		handle_errors("Error: Less or more Arguments!\n");
 	if (!check_digit(av[1]) || !check_digit(av[2])
-			|| !check_digit(av[3]) || !check_digit(av[4]))
+		|| !check_digit(av[3]) || !check_digit(av[4]))
 		handle_errors("Error: You should put just Positive Numbers!\n");
 	if (ac == 6 && !check_digit(av[5]))
 		handle_errors("Error: You should put just Numbers!\n");
-	if (my_atoi(av[1]) < 0 || my_atoi(av[1]) > 200)
-		handle_errors("Error: The philosepher should be > 0 & not more than 200 strict!\n");
+	if (my_atoi(av[1]) < 1)
+		handle_errors("Error: av[1] > 1 ( u need 2 forks at least to eat)!\n");
 	if (my_atoi(av[2]) <= 60 || my_atoi(av[3]) <= 60 || my_atoi(av[4]) <= 60)
 		handle_errors("Error: The av[2],av[3],av[4] should be >= 60!\n");
 	if (ac == 6 && my_atoi(av[5]) <= 0)
 		handle_errors("Error: The Round of eating should be > 0!\n");
 }
 
-sem_t *open_sem(unsigned int n, char *fd_name)
+sem_t	*open_sem(unsigned int n, char *fd_name)
 {
-	sem_t *semaphore;
+	sem_t	*semaphore;
 
 	sem_unlink(fd_name);
 	semaphore = sem_open(fd_name, O_CREAT, 0777, n);
 	return (semaphore);
 }
 
-void initial_sem(t_data *data)
+void	initial_sem(t_data *data)
 {
 	data->forks = open_sem(data->nbr_philo, "fork");
 	data->mtx_death = open_sem(1, "mtx_death");
 	data->msg = open_sem(1, "msg");
 	data->philo_dead = open_sem(1, "philo_dead");
 }
-void init_philos(char **av, t_data *data)
+
+void	init_philos(char **av, t_data *data)
 {
-	int i;
-	unsigned long long time;
+	unsigned int		i;
+	unsigned long long	time;
 
 	i = 0;
 	time = time_data();
@@ -70,7 +71,7 @@ void init_philos(char **av, t_data *data)
 	}
 }
 
-void initial_data(char **av, t_data *data)
+void	initial_data(char **av, t_data *data)
 {
 	data->nbr_philo = (unsigned int)my_atoi(av[1]);
 	data->nbr_forks = (unsigned int)my_atoi(av[1]);
@@ -81,6 +82,9 @@ void initial_data(char **av, t_data *data)
 		data->nbr = (unsigned int)my_atoi(av[5]);
 	else
 		data->nbr = -1;
-	data->philos = (t_philo_state*)malloc(sizeof(*(data->philos)) * data->nbr_philo); 
+	data->philos = (t_philo_state *)
+		malloc(sizeof(*(data->philos)) * data->nbr_philo);
+	if (!data->philos)
+		return ;
 	init_philos(av, data);
 }
