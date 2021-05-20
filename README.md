@@ -7,6 +7,9 @@ In this repository u will see he basics of threading a process and how to work o
     and a multitasking is the feature that allows your computer 
     to run two or more programs concurrently.
     
+    
+<a href="https://ibb.co/G2DdpGx"><img src="https://i.ibb.co/BZJf3vz/Screen-Shot-2021-05-20-at-9-41-36-PM.png" alt="Screen-Shot-2021-05-20-at-9-41-36-PM" border="0"></a><br />
+    
  # What Are Threads? :clipboard:	
     A thread is a small sequence of programmed instructions.
     Threads refer to the highest level of code your processor can execute.
