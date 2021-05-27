@@ -6,7 +6,7 @@
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/04 13:06:20 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/05/27 15:08:14 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/05/27 15:09:28 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,10 @@
 void 	check_error(int ac, char **av)
 {
 	if (ac <= 1)
+	{
 		handle_errors("Error: ADD Arguments!\n");
+		return;
+	}
 	if (ac < 5 || ac > 6)
 		handle_errors("Error: Less or more Arguments!\n");
 	if (!check_digit(av[1]) || !check_digit(av[2])

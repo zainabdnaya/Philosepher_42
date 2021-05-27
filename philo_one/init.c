@@ -6,20 +6,22 @@
 /*   By: zdnaya <zdnaya@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/17 11:42:28 by zdnaya            #+#    #+#             */
-/*   Updated: 2021/05/27 15:08:29 by zdnaya           ###   ########.fr       */
+/*   Updated: 2021/05/27 15:09:21 by zdnaya           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosepher.h"
 
-void	check_error(int ac, char **av)
+void check_error(int ac, char **av)
 {
 	if (ac <= 1)
+	{
 		handle_errors("Error: ADD Arguments!\n");
+		return;
+	}
 	if (ac < 5 || ac > 6)
 		handle_errors("Error: Less or more Arguments!\n");
-	if (!check_digit(av[1]) || !check_digit(av[2])
-		|| !check_digit(av[3]) || !check_digit(av[4]))
+	if (!check_digit(av[1]) || !check_digit(av[2]) || !check_digit(av[3]) || !check_digit(av[4]))
 		handle_errors("Error: You should put just Positive Numbers!\n");
 	if (ac == 6 && !check_digit(av[5]))
 		handle_errors("Error: You should put just Numbers!\n");
@@ -31,7 +33,7 @@ void	check_error(int ac, char **av)
 		handle_errors("Error: The Round of eating should be > 0!\n");
 }
 
-void	init_philos(char **av, t_data *data, uint64_t time, unsigned int i)
+void init_philos(char **av, t_data *data, uint64_t time, unsigned int i)
 {
 	pthread_mutex_init(data->msg, NULL);
 	pthread_mutex_init(data->is_death, NULL);
@@ -58,31 +60,31 @@ void	init_philos(char **av, t_data *data, uint64_t time, unsigned int i)
 	}
 }
 
-void	allocate(t_data *data)
+void allocate(t_data *data)
 {
 	data->philos = (t_philo_state *)
 		malloc(sizeof(*(data->philos)) * data->nbr_philo);
 	if (!data->philos)
-		return ;
+		return;
 	data->forks = (pthread_mutex_t *)
 		malloc(sizeof(pthread_mutex_t) * (data->nbr_forks));
 	if (!data->forks)
-		return ;
+		return;
 	data->is_death = malloc(sizeof(pthread_mutex_t));
 	if (!data->is_death)
-		return ;
+		return;
 	data->philo_dead = malloc(sizeof(pthread_mutex_t));
 	if (!data->philo_dead)
-		return ;
+		return;
 	data->msg = malloc(sizeof(pthread_mutex_t));
 	if (!data->msg)
-		return ;
+		return;
 }
 
-void	initial_data(char **av, t_data *data)
+void initial_data(char **av, t_data *data)
 {
-	unsigned int	i;
-	uint64_t		time;
+	unsigned int i;
+	uint64_t time;
 
 	data->nbr_philo = (unsigned int)my_atoi(av[1]);
 	data->nbr_forks = (unsigned int)my_atoi(av[1]);
