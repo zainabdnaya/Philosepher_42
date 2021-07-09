@@ -102,7 +102,13 @@ int	destroy_free(t_data *data)
 int	main(int ac, char **av)
 {
 	t_data	data;
-
+	if (ac <= 1)
+	{
+		handle_errors("Error: ADD Arguments!\n");
+		return(0);
+	}
+	else
+	{
 	check_error(ac, av);
 	initial_data(av, &data);
 	initial_sem(&data);
@@ -110,4 +116,5 @@ int	main(int ac, char **av)
 	creat_threads(&data);
 	sem_wait(data.philo_dead);
 	destroy_free(&data);
+	}
 }

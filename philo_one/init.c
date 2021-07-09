@@ -14,11 +14,7 @@
 
 void check_error(int ac, char **av)
 {
-	if (ac <= 1)
-	{
-		handle_errors("Error: ADD Arguments!\n");
-		return;
-	}
+
 	if (ac < 5 || ac > 6)
 		handle_errors("Error: Less or more Arguments!\n");
 	if (!check_digit(av[1]) || !check_digit(av[2]) || !check_digit(av[3]) || !check_digit(av[4]))

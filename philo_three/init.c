@@ -17,7 +17,7 @@ void	check_error(int ac, char **av)
 	if (ac <= 1)
 	{
 		handle_errors("Error: ADD Arguments!\n");
-		return;
+		exit(0);
 	}
 	if (ac < 5 || ac > 6)
 		handle_errors("Error: Less or more Arguments!\n");

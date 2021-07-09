@@ -118,10 +118,18 @@ int	main(int ac, char **av)
 {
 	t_data	data;
 
-	check_error(ac, av);
+	if (ac <= 1)
+	{
+		handle_errors("Error: ADD Arguments!\n");
+		return(0);
+	}
+	else
+	{
+		check_error(ac, av);
 	initial_data(av, &data);
 	pthread_mutex_lock(data.philo_dead);
 	creat_threads(&data);
 	pthread_mutex_lock(data.philo_dead);
 	destroy_free(&data);
+	}
 }
